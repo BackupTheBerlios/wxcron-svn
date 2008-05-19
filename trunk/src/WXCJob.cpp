@@ -67,7 +67,7 @@ wxDateTime WXCJob::CalculateNextTime ()
 {
     wxDateTime dtNow(wxDateTime::Now());
 
-    if (
+    // XXX if (
 }
 
 void WXCJob::Parse (const wxString& strOriginalLine)
