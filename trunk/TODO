@@ -1,0 +1,18 @@
+- implement about dialog
+- implement settings and a dialog
+- settings: max log-file size
+- settings: systray icon optional (maybe disapear after 10 sec)
+- settings: interval check for crontab (in minutes, only on start)
+- add Inkscape to the credits
+- take care of max timer wait (~24 days) limited by INT_MAX
+
+cron-manpage: http://unixhelp.ed.ac.uk/CGI/man-cgi?cron+8
+crontab(5)-manpage: http://unixhelp.ed.ac.uk/CGI/man-cgi?crontab+5
+crontab(8)-manpage: http://unixhelp.ed.ac.uk/CGI/man-cgi?crontab
+
+
+minute_: 0, 4, 9, 14, 19, 24, 29, 34, 39, 44, 49, 54, 59
+hour_:  0, 1, 23
+day_:
+month_:
+weekday_:
