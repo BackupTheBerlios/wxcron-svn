@@ -31,7 +31,8 @@
 
 
 WXCLog::WXCLog ()
-      : lMaxSize_(WXC_LOG_MAXSIZE),
+      : // XXX lMaxSize_(WXC_LOG_MAXSIZE),
+        lMaxSize_(1),
         fileLog_(WXC_LOG, wxFile::write_append)
 {
     CareSize();

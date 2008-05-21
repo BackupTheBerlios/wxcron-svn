@@ -93,6 +93,7 @@
 		<Unit filename="BUILD" />
 		<Unit filename="CHANGELOG" />
 		<Unit filename="CREDITS" />
+		<Unit filename="HELP" />
 		<Unit filename="HISTORY" />
 		<Unit filename="INSTALL" />
 		<Unit filename="LICENSE" />
@@ -104,6 +105,8 @@
 		<Unit filename="include\WXCJob.h" />
 		<Unit filename="include\WXCLog.h" />
 		<Unit filename="include\WXCTaskBarIcon.h" />
+		<Unit filename="include\WXCTime.h" />
+		<Unit filename="include\WXCTimeValue.h" />
 		<Unit filename="include\WXCTimer.h" />
 		<Unit filename="include\wxCron.h" />
 		<Unit filename="src\WXCApp.cpp" />
@@ -111,6 +114,8 @@
 		<Unit filename="src\WXCJob.cpp" />
 		<Unit filename="src\WXCLog.cpp" />
 		<Unit filename="src\WXCTaskBarIcon.cpp" />
+		<Unit filename="src\WXCTime.cpp" />
+		<Unit filename="src\WXCTimeValue.cpp" />
 		<Unit filename="src\WXCTimer.cpp" />
 		<Unit filename="wxCron.log" />
 		<Unit filename="wxCron.rc">

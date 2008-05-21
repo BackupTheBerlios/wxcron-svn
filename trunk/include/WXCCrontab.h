@@ -63,6 +63,8 @@ class WXCCrontab
         /** Check if the crontab file was modifide since the
             last read and read it again if needed. */
         static void CheckModification ();
+
+        void XXX (const wxString& str, short iFrom, short iTo);
 };
 
 #endif    // WXCCRONTAB_H

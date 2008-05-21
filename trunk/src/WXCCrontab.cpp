@@ -115,6 +115,32 @@ WXCCrontab::WXCCrontab ()
     }
 }
 
+#include "WXCTimeValue.h"
+
+void WXCCrontab::XXX (const wxString& str, short iFrom, short iTo)
+{
+    WXCTimeValue tv(str, iFrom, iTo);
+    bool bHas;
+    short iNext;
+    wxString strLog;
+
+    for (short i = 0; i < 100; ++i)
+    {
+        bHas = tv.HasThisValue(i);
+        iNext = tv.GetNextValue(i);
+
+        WXCLog::Do(wxString::Format("\"%s\" %d - %d: %s;\tCURRENT: %d => NEXT: %d",
+                               str,
+                               iFrom,
+                               iTo,
+                               bHas ? "HAS" : "HAS NOT",
+                               i,
+                               iNext), false);
+
+    }
+    WXCLog::Do(wxEmptyString, false);
+}
+
 void WXCCrontab::Start ()
 {
     for (WXCJobVectorIt it = vecJobs_.begin();
