@@ -116,6 +116,7 @@ WXCCrontab::WXCCrontab ()
 }
 
 #include "WXCTimeValue.h"
+#include "WXCTime.h"
 
 void WXCCrontab::XXX (const wxString& str, short iFrom, short iTo)
 {
@@ -143,6 +144,15 @@ void WXCCrontab::XXX (const wxString& str, short iFrom, short iTo)
 
 void WXCCrontab::Start ()
 {
+    wxString strLine("30   1   5 * *    calc.exe");
+    wxDateTime dt(20, wxDateTime::May, 2008, 12, 54, 37);
+    WXCTime t(strLine);
+
+    WXCLog::Do(strLine);
+    WXCLog::Do(wxString::Format("CURRENT: %s ==> NEXT: %s", dt.Format(), t.GetNext(dt).Format()));
+
+    return;
+
     for (WXCJobVectorIt it = vecJobs_.begin();
          it != vecJobs_.end();
          ++it)

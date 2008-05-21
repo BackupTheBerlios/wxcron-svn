@@ -27,14 +27,46 @@
 WXCTimeValue::WXCTimeValue (const wxString& strCrontabParameter,
                             short iRangeValidFrom,
                             short iRangeValidTo)
-            : pairValidRange_(iRangeValidFrom,
-                              iRangeValidTo),
+            : pairValidRange_(-1, -1),
               iStepFree_(-1),
               pairpairStepsInRanges_(PairShort(-1, -1), -1)
 {
+    Reset (strCrontabParameter, iRangeValidFrom, iRangeValidTo);
+}
+
+WXCTimeValue::WXCTimeValue ()
+            : pairValidRange_(-1, -1),
+              iStepFree_(-1),
+              pairpairStepsInRanges_(PairShort(-1, -1), -1)
+{
+}
+
+void WXCTimeValue::Reset (const wxString& strCrontabParameter,
+                          short iRangeValidFrom,
+                          short iRangeValidTo)
+{
+    Clear();
+    pairValidRange_.first = iRangeValidFrom;
+    pairValidRange_.second = iRangeValidTo;
     Parse(strCrontabParameter);
 }
 
+void WXCTimeValue::SetValidRange (short iFrom, short iTo)
+{
+    pairValidRange_ = PairShort(iFrom, iTo);
+}
+
+void WXCTimeValue::Clear ()
+{
+    arrError_.Clear();
+    pairValidRange_.first = -1;
+    pairValidRange_.second = -1;
+    vecSingle_.clear();
+    vecpairRange_.clear();
+    iStepFree_ = -1;
+    pairpairStepsInRanges_.first = PairShort(-1, -1);
+    pairpairStepsInRanges_.second = -1;
+}
 
 void WXCTimeValue::Parse (const wxString& strCrontabParameter)
 {

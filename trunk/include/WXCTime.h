@@ -24,21 +24,61 @@
 #ifndef WXCTIME_H
 #define WXCTIME_H
 
-///
+#include "WXCTimeValue.h"
+
+#include <wx/datetime.h>
+
+/**
+ A couple of possible date values depending on a parsed crontab
+ line.
+ */
 class WXCTime
 {
     private:
-        /// private members
+        /// minute
+        WXCTimeValue    minute_;
 
-    protected:
-        /// proteced members
+        /// hour
+        WXCTimeValue    hour_;
+
+        /// day of month
+        WXCTimeValue    day_;
+
+        /** month
+            ATTENTION: Keep in mind, that crontab month can be values from 1 to 12
+            but wxDateTime::Month store its month values from 0 to 11! */
+        WXCTimeValue    month_;
+
+        /// day of week
+        WXCTimeValue    weekday_;
+
+        /** Errors while parsing are stored here and can be
+            checked with IsValid() and read with GetError(). */
+        wxArrayString   arrError_;
+
+        /** The rest/unparsed part of the crontabline.
+            Normaly it is the command to execute. */
+        wxString        strUnparsed_;
+
+        ///
+        void Parse (const wxString& strCrontabLine);
 
     public:
-        /// ctor
-        WXCTime ();
+        ///
+        WXCTime (const wxString& strCrontabLine);
 
         /// virtual dtor
         virtual ~WXCTime ();
+
+        ///
+        const wxArrayString& GetError ();
+        ///
+        const wxString& GetUnparsed ();
+        ///
+        bool IsValid ();
+
+        ///
+        wxDateTime GetNext (const wxDateTime& dtCurrent);
 };
 
 #endif    // WXCTIME_H

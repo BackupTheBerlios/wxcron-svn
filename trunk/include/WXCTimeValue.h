@@ -73,14 +73,31 @@ class WXCTimeValue
         ///
         void Parse (const wxString& strCrontabParameter);
 
+        ///
+        void Clear ();
+
     public:
-        /// ctor
+        ///
         WXCTimeValue (const wxString& strCrontabParameter,
                       short iRangeValidFrom,
                       short iRangeValidTo);
 
+        ///
+        WXCTimeValue ();
+
         /// virtual dtor
         virtual ~WXCTimeValue ();
+
+        ///
+        void Reset (const wxString& strCrontabParameter,
+                    short iRangeValidFrom,
+                    short iRangeValidTo);
+
+        /** Set a new range ('pairValidRange_') for valid values.
+            Be carefull with use of this methode.
+            Normaly it is used to modify the max-days (30 or 31)
+            depending on a month. */
+        void SetValidRange (short iFrom, short iTo);
 
         ///
         const wxArrayString& GetError ();
