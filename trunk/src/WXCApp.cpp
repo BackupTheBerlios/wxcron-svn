@@ -65,6 +65,7 @@ WXCApp::WXCApp ()
 /*virtual*/ bool WXCApp::OnInit()
 {
     // log start
+    WXCLog::Do(wxEmptyString, false);
     WXCLog::Do(wxString::Format("%s started...", GetFullApplicationName()));
 
     // read the crontab file

@@ -1,5 +1,5 @@
-test
-
+- list of ranges "1-3,10-14"
+- steps and ranges "0-23/2"
 - implement about dialog
 - implement settings and a dialog
 - settings: max log-file size

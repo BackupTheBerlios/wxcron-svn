@@ -68,14 +68,13 @@ bool WXCTimer::Start (const wxDateTime& timeNextWakeUp)
 
 void WXCTimer::Notify ()
 {
-    if (timeNextWakeUp_ == wxInvalidDateTime)
+    if (timeNextWakeUp_.IsValid())
     {
-        wxExecute(strCommand_, wxEXEC_ASYNC);
-
-        pParentJob_->Start();
+        Start (timeNextWakeUp_);
     }
     else
     {
-        Start (timeNextWakeUp_);
+        wxExecute(strCommand_, wxEXEC_ASYNC);
+        pParentJob_->Start();
     }
 }

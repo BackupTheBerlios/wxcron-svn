@@ -61,7 +61,7 @@ class WXCLog
         }
 
         /// log a message
-        static void Do(const wxString& str);
+        static void Do(const wxString& str, bool bWithTimestamp = true);
 };
 
 #endif    // WXCLOG_H

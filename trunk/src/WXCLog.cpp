@@ -70,15 +70,23 @@ void WXCLog::CareSize ()
     }
 }
 
-/*static*/ void WXCLog::Do(const wxString& str)
+/*static*/ void WXCLog::Do(const wxString& str, bool bWithTimestamp /*= true*/)
 {
     // result string written to the file
     wxString strLog;
 
-    // create message with timestamp
-    strLog << wxDateTime::Now().Format("%Y-%m-%d %H:%M:%S : ")
-           << str
-           << '\n';
+    if (bWithTimestamp)
+    {
+        // create message with timestamp
+        strLog << wxDateTime::Now().Format("%Y-%m-%d %H:%M:%S : ")
+               << str
+               << '\n';
+    }
+    else
+    {
+        // create message without timestamp
+        strLog << str << '\n';
+    }
 
     // write to the file
     Instance().fileLog_.Write(strLog);

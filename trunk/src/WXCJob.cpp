@@ -25,6 +25,8 @@
 
 #include <wx/tokenzr.h>
 #include <wx/log.h>
+// XXX
+#include <wx/msgdlg.h>
 
 #include "WXCTimer.h"
 #include "WXCLog.h"
@@ -32,7 +34,8 @@
 
 WXCJob::WXCJob (const wxString& strOriginalLine, long lLine)
       : lLine_(lLine),
-        pTimer_(NULL)
+        pTimer_(NULL),
+        strOriginalLine_(strOriginalLine)
 {
     Parse(strOriginalLine);
 }
@@ -47,6 +50,21 @@ WXCJob::WXCJob (const wxString& strOriginalLine, long lLine)
 
 void WXCJob::Start ()
 {
+    // XXX
+    wxDateTime dtNow(20, wxDateTime::May, 2008, 12, 54, 37);
+    wxDateTime dtNext;
+
+    WXCLog::Do(wxString::Format("%s (Line: %d)", strOriginalLine_, lLine_));
+    for (int i = 0;
+         i < 5000;
+         ++i)
+    {
+        dtNext = CalculateNextTime(dtNow);
+        WXCLog::Do(wxString::Format("NOW:  %s\nNEXT: %s\n", dtNow.Format(), dtNext.Format()), false);
+        dtNow = dtNext;
+    }
+    return;
+
     // old timer there?
     if (pTimer_)
     {
@@ -62,12 +80,151 @@ void WXCJob::Start ()
     pTimer_->Start(CalculateNextTime());
 }
 
-
-wxDateTime WXCJob::CalculateNextTime ()
+/*static*/ long WXCJob::GetNextValue (longVector& rVec, long lCurrentValue)
 {
-    wxDateTime dtNow(wxDateTime::Now());
+    long lNextValue = *(rVec.begin());
 
-    // XXX if (
+    for (longVectorIt it = rVec.begin();
+         it != rVec.end();
+         ++it)
+    {
+        if ( (*it) > lCurrentValue )
+        {
+            lNextValue = (*it);
+            break;
+        }
+    }
+
+    return lNextValue;
+}
+
+
+/*static*/ bool WXCJob::HasThisValue (longVector& rVec, long lCurrentValue)
+{
+    for (longVectorIt it = rVec.begin();
+         it != rVec.end();
+         ++it)
+    {
+        if ( (*it) == lCurrentValue )
+            return true;
+    }
+
+    return false;
+}
+
+wxDateTime WXCJob::CalculateNextTime (const wxDateTime& dtNow /*= wxDateTime::Now()*/)
+{
+    wxDateTime dtWakeUp(dtNow);
+    //wxDateTime dtWakeUp(20, wxDateTime::May, 2008, 12, 54, 37);
+
+    // second to 0
+    dtWakeUp.SetSecond(0);
+    dtWakeUp.SetMillisecond(0);
+
+    // *** minute ***
+    //wxMessageBox(dtWakeUp.Format());
+    SetNextMinute(dtWakeUp);
+    //wxMessageBox(dtWakeUp.Format());
+
+    // *** hour ***
+    //wxMessageBox(dtWakeUp.Format());
+    if ( !(HasThisValue(hour_, dtWakeUp.GetHour())) )
+        SetNextHour(dtWakeUp);
+    //wxMessageBox(dtWakeUp.Format());
+
+    // *** day || weekday ***
+    //wxMessageBox(dtWakeUp.Format());
+    while ( !(HasThisValue(day_, dtWakeUp.GetDay()))
+      && !(HasThisValue(weekday_, dtWakeUp.GetWeekDay())) )
+    {
+        // increment day
+        dtWakeUp.Add(wxDateSpan(0, 0, 0, 1));
+    }
+    //wxMessageBox(dtWakeUp.Format());
+
+    // month
+    //wxMessageBox(dtWakeUp.Format());
+    if ( !(HasThisValue(month_, (dtWakeUp.GetMonth()+1))) )
+        SetNextMonth(dtWakeUp);
+    //wxMessageBox(dtWakeUp.Format());
+
+    return dtWakeUp;
+}
+
+bool WXCJob::SetNextMinute (wxDateTime& dt)
+{
+    bool bIncremented = false;
+    long lNextVal = GetNextValue(minute_, dt.GetMinute());
+
+    // increment hour
+    if (lNextVal <= dt.GetMinute())
+    {
+        dt.Add(wxTimeSpan(1, 0, 0, 0));
+        bIncremented = true;
+    }
+
+    // set new minute
+    dt.SetMinute(lNextVal);
+
+    return bIncremented;
+}
+
+bool WXCJob::SetNextHour (wxDateTime& dt)
+{
+    bool bIncremented = false;
+    long lNextVal = GetNextValue(hour_, dt.GetHour());
+
+    // increment day?
+    if (lNextVal < dt.GetHour())
+    {
+        dt.Add(wxDateSpan(0, 0, 0, 1));
+        bIncremented = true;
+    }
+
+    // set new hour
+    dt.SetHour(lNextVal);
+
+    return bIncremented;
+}
+
+bool WXCJob::SetNextDay (wxDateTime& dt)
+{
+    bool bIncremented = false;
+    long lNextVal = GetNextValue(day_, dt.GetDay());
+
+    // end of month?
+    if ( lNextVal > wxDateTime::GetNumberOfDays(dt.GetMonth(), dt.GetYear()) )
+        lNextVal = GetNextValue(day_, lNextVal);
+
+    // increment month?
+    if (lNextVal < dt.GetDay())
+    {
+        dt.Add(wxDateSpan(0, 1, 0, 0));
+        bIncremented = true;
+    }
+
+    // set new day
+    dt.SetDay(lNextVal);
+
+    return bIncremented;
+}
+
+bool WXCJob::SetNextMonth (wxDateTime& dt)
+{
+    bool bIncremented = false;
+    long lNextVal = GetNextValue(month_, dt.GetMonth()+1);
+
+    // increment year?
+    if (lNextVal < (dt.GetMonth()+1) )
+    {
+        dt.Add(wxDateSpan(1, 0, 0, 0));
+        bIncremented = true;
+    }
+
+    // set new month
+    dt.SetMonth((wxDateTime::Month)(lNextVal-1));
+
+    return bIncremented;
 }
 
 void WXCJob::Parse (const wxString& strOriginalLine)
@@ -78,7 +235,7 @@ void WXCJob::Parse (const wxString& strOriginalLine)
     size_t          idx;
 
     // extract the parameters
-    while ( !(str.IsEmpty()) || arrStrings.GetCount() < 5 )
+    while ( !(str.IsEmpty()) && arrStrings.GetCount() < 5 )
     {
         // find white spaces at the beginning
         idx = 0;
@@ -94,6 +251,8 @@ void WXCJob::Parse (const wxString& strOriginalLine)
 
         //
         arrStrings.Add(strCurrent);
+
+        // XXX        WXCLog::Do(wxString::Format("\"%s\" count: %d", strCurrent, arrStrings.GetCount()));
     }
 
     // enough parameters
@@ -106,29 +265,47 @@ void WXCJob::Parse (const wxString& strOriginalLine)
     }
 
     // command
-    strCommand_ = str;
+    strCommand_ = str.Trim(false);
+
+    // XXX
+    WXCLog::Do(wxString::Format("Line: %d => %s (%s)", lLine_, wxJoin(arrStrings, ';'), strCommand_), false);
+
+    // XXX
+    wxDateTime dt(20, wxDateTime::May, 2008, 12, 54, 37);
 
     // minutes
-    Parse(arrStrings[0], minute_, 0, 59);
+    Parse(arrStrings[0], minute_, 0, 59, dt.GetMinute());
 
     // hours
-    Parse(arrStrings[1], hour_, 0, 23);
+    Parse(arrStrings[1], hour_, 0, 23, dt.GetHour());
 
-    // days
-    Parse(arrStrings[2], day_, 1, 31);
+    // only use day of month; ignore day of week
+    if ( arrStrings[4] == "*" )
+    {
+        Parse(arrStrings[2], day_, 1, 31, dt.GetDay());
+    }
+    // only use day of week; ignore day of month
+    else
+    {
+        // day of month OR day of week
+        if ( arrStrings[2] != "*" )
+            Parse(arrStrings[2], day_, 1, 31, dt.GetDay());
+
+        Parse(arrStrings[4], weekday_, 0, 7, dt.GetWeekDay());
+    }
 
     // month
-    Parse(arrStrings[3], month_, 1, 12);
-
-    // day of week
-    Parse(arrStrings[4], weekday_, 1, 7);
+    Parse(arrStrings[3], month_, 1, 12, dt.GetMonth()+1);
 }
 
 void WXCJob::Parse (const wxString& str,
                     longVector& rVec,
                     int iRangeFrom,
-                    int iRangeTo)
+                    int iRangeTo,
+                    int iCurrValue)
 {
+    // XXX    WXCLog::Do(str);
+
     // just (*)
     if (str == '*')
     {
@@ -137,13 +314,18 @@ void WXCJob::Parse (const wxString& str,
     }
 
     // number-steps (*/n)
-    if (str.Find('/'))
+    if (str.Find('/') != wxNOT_FOUND)
     {
         long lStep;
 
         if ( str.AfterFirst('/').ToLong(&lStep) )
         {
-            FillValues(rVec, iRangeFrom, iRangeTo, lStep);
+            while (iCurrValue > iRangeFrom)
+                iCurrValue = iCurrValue - lStep;
+
+            iCurrValue = iCurrValue + lStep;
+
+            FillValues(rVec, iRangeFrom + iCurrValue, iRangeTo, lStep);
         }
         else
         {
@@ -156,7 +338,7 @@ void WXCJob::Parse (const wxString& str,
     }
 
     // number-list (n,m)
-    if (str.Find(','))
+    if (str.Find(',') != wxNOT_FOUND)
     {
         wxStringTokenizer tkn(str, ',');
         long              lVal;
@@ -187,7 +369,7 @@ void WXCJob::Parse (const wxString& str,
     }
 
     // number-range (n-m)
-    if (str.Find('-'))
+    if (str.Find('-') != wxNOT_FOUND)
     {
         long lFrom, lTo;
 
