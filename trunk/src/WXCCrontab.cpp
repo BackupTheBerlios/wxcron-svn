@@ -164,9 +164,9 @@ void WXCCrontab::YYY (const wxString& str)
 
 void WXCCrontab::Start ()
 {
-    //YYY("30   1   5 * *");
-    //YYY("30   1   */5 * *");
-    //YYY("30   1   3,14 * *");
+    YYY("30   1   5 * *");
+    YYY("30   1   */5 * *");
+    YYY("30   1   3,14 * *");
     YYY("30   1   5-20/3 * *");
     return;
 

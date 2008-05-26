@@ -528,7 +528,7 @@ short WXCTimeValue::GetNextValue (const short iCurrent)
         // over range
         if ( iCurrent > (iTo - iStep) )
         {
-            if (iCurrent > iTo)
+            if (iCurrent >= iTo)
                 iNext = iFrom;
             else
                 iNext = iTo;
