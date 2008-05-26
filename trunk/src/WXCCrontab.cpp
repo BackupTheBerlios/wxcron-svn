@@ -142,15 +142,32 @@ void WXCCrontab::XXX (const wxString& str, short iFrom, short iTo)
     WXCLog::Do(wxEmptyString, false);
 }
 
+void WXCCrontab::YYY (const wxString& str)
+{
+    WXCTime t(str);
+    wxDateTime dt(19, wxDateTime::May, 2008, 12, 54, 37);
+    wxDateTime dtNext(dt);
+
+    WXCLog::Do(str);
+    for (short i = 0; i < 100; ++i)
+    {
+        dtNext = t.GetNext(dt);
+        WXCLog::Do(wxString::Format("%d;\tCURRENT: %s => NEXT: %s",
+                               i,
+                               dt.Format(),
+                               dtNext.Format()), false);
+        dt = dtNext;
+
+    }
+    WXCLog::Do(wxEmptyString, false);
+}
+
 void WXCCrontab::Start ()
 {
-    wxString strLine("30   1   5 * *    calc.exe");
-    wxDateTime dt(20, wxDateTime::May, 2008, 12, 54, 37);
-    WXCTime t(strLine);
-
-    WXCLog::Do(strLine);
-    WXCLog::Do(wxString::Format("CURRENT: %s ==> NEXT: %s", dt.Format(), t.GetNext(dt).Format()));
-
+    //YYY("30   1   5 * *");
+    //YYY("30   1   */5 * *");
+    //YYY("30   1   3,14 * *");
+    YYY("30   1   5-20/3 * *");
     return;
 
     for (WXCJobVectorIt it = vecJobs_.begin();

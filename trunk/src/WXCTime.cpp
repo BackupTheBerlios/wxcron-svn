@@ -115,40 +115,59 @@ wxDateTime WXCTime::GetNext (const wxDateTime& dtCurrent)
 {
     wxDateTime  dtNext(dtCurrent);
     short       iVal;
-
-    // XXX
-    WXCLog::Do(dtNext.Format(), false);
+    short       iInitial, iInitialB;
+    bool        bIncremented = false;
 
     // seconds to 0
     dtNext.SetSecond(0);
     dtNext.SetMillisecond(0);
 
+    // XXX        WXCLog::Do(dtNext.Format(), false);
 
     // --- MINUTE ---
     iVal = minute_.GetNextValue(dtNext.GetMinute());
 
     // increment hours?
     if ( iVal < dtNext.GetMinute() )
+    {
         dtNext.Add(wxTimeSpan(1, 0, 0, 0));
+        bIncremented = true;
+    }
 
     // set minute
     dtNext.SetMinute(iVal);
 
-    // XXX
-    WXCLog::Do(dtNext.Format(), false);
+
+    // XXX        WXCLog::Do(dtNext.Format(), false);
+
 
     // --- HOUR ---
-    iVal = hour_.GetNextValue(dtNext.GetHour());
+    iInitial = dtCurrent.GetHour();
+    if ( !(dtNext > dtCurrent && hour_.HasThisValue(dtNext.GetHour(), &iInitial)) )
+    {
+        if (bIncremented)
+        {
+            // decrement hour
+            dtNext.Subtract(wxTimeSpan(1, 0, 0, 0));
+            bIncremented = false;
+        }
 
-    // increment day?
-    if ( iVal < dtNext.GetHour() )
-        dtNext.Add(wxDateSpan(0, 0, 0, 1));
+        iVal = hour_.GetNextValue(dtNext.GetHour());
 
-    // set hour
-    dtNext.SetHour(iVal);
+        // increment day?
+        if ( iVal < dtNext.GetHour() )
+        {
+            dtNext.Add(wxDateSpan(0, 0, 0, 1));
+            bIncremented = true;
+        }
 
-    // XXX
-    WXCLog::Do(dtNext.Format(), false);
+        // set hour
+        dtNext.SetHour(iVal);
+    }
+
+
+    // XXX        WXCLog::Do(dtNext.Format(), false);
+
 
     // --- DAY OF MONTH / DAY OF WEEK ---
     /* For a better understanding here are the rules how "day of month" and
@@ -163,72 +182,133 @@ wxDateTime WXCTime::GetNext (const wxDateTime& dtCurrent)
     // day of month AND day of week are restricted (that means != "*")
     if (day_.IsRestricted() && weekday_.IsRestricted())
     {
-        short iValDay       = day_.GetNextValue(dtNext.GetDay());
-        short iValWeekDay   = weekday_.GetNextValue(dtNext.GetWeekDay());
+        iInitialB = dtCurrent.GetDay();
+        iInitial = dtCurrent.GetWeekDay();
 
-        wxDateTime dtNextDay(dtNext);
-        wxDateTime dtNextWeekDay(dtNext);
+        if ( !(dtNext > dtCurrent
+          && ( day_.HasThisValue(dtNext.GetDay(), &iInitialB) || weekday_.HasThisValue(dtNext.GetWeekDay(), &iInitial) )) )
+        {
+            if (bIncremented)
+            {
+                // decrement day
+                dtNext.Subtract(wxDateSpan(0, 0, 0, 1));
+                bIncremented = false;
+            }
 
-        // increment month?
-        if ( iValDay < dtNextDay.GetDay() )
-            dtNextDay.Add(wxDateSpan(0, 1, 0, 0));
+            short iValDay       = day_.GetNextValue(dtNext.GetDay());
+            short iValWeekDay   = weekday_.GetNextValue(dtNext.GetWeekDay());
 
-        dtNextDay.SetDay(iValDay);
+            wxDateTime dtNextDay(dtNext);
+            wxDateTime dtNextWeekDay(dtNext);
 
-        // increment day?
-        if ( iValWeekDay < dtNextWeekDay.GetWeekDay() )
-            dtNextWeekDay.Add(wxDateSpan(0, 0, 0, 6-dtNextWeekDay.GetWeekDay()+iValWeekDay));
+            short iMonth = dtNext.GetMonth();
 
-        // which do we use
-        if (dtNextDay < dtNextWeekDay)
-            dtNext = dtNextDay;
-        else
-            dtNext = dtNextWeekDay;
+            // increment month?
+            if ( iValDay < dtNextDay.GetDay() )
+                dtNextDay.Add(wxDateSpan(0, 1, 0, 0));
+
+            dtNextDay.SetDay(iValDay);
+
+            // increment week?
+            if ( iValWeekDay < dtNextWeekDay.GetWeekDay() )
+                dtNextWeekDay.Add(wxDateSpan(0, 0, 0, 6-dtNextWeekDay.GetWeekDay()+iValWeekDay));
+
+            // which do we use
+            if (dtNextDay < dtNextWeekDay)
+                dtNext = dtNextDay;
+            else
+                dtNext = dtNextWeekDay;
+
+            // month incremented?
+            if (iMonth != dtNext.GetMonth())
+                bIncremented = true;
+        }
     }
     else
     {
         // only the day of month restricted
         if ( day_.IsRestricted() )
         {
-            iVal = day_.GetNextValue(dtNext.GetDay());
+            if ( !(dtNext > dtCurrent && day_.HasThisValue(dtNext.GetDay(), &iInitialB)) )
+            {
+                if (bIncremented)
+                {
+                    // decrement day
+                    dtNext.Subtract(wxDateSpan(0, 0, 0, 1));
+                    bIncremented = false;
+                }
 
-            // increment month?
-            if ( iVal < dtNext.GetDay() )
-                dtNext.Add(wxDateSpan(0, 1, 0, 0));
+                iVal = day_.GetNextValue(dtNext.GetDay());
 
-            // set day
-            dtNext.SetDay(iVal);
+                // increment month?
+                if ( iVal < dtNext.GetDay() )
+                {
+                    dtNext.Add(wxDateSpan(0, 1, 0, 0));
+                    bIncremented = true;
+                }
+
+                // set day
+                dtNext.SetDay(iVal);
+            }
         }
 
         // only the day of week restricted
         if ( weekday_.IsRestricted() )
         {
-            iVal = weekday_.GetNextValue(dtNext.GetWeekDay());
+            if ( !(dtNext > dtCurrent && weekday_.HasThisValue(dtNext.GetWeekDay(), &iInitial)) )
+            {
+                if (bIncremented)
+                {
+                    // decrement day
+                    dtNext.Subtract(wxDateSpan(0, 0, 0, 1));
+                    bIncremented = false;
+                }
 
-            // set day
+                iVal = weekday_.GetNextValue(dtNext.GetWeekDay());
+
+                short iMonth = dtNext.GetMonth();
+
+                // set day
                 dtNext.Add(wxDateSpan(0, 0, 0, 6-dtNext.GetWeekDay()+iVal));
+
+                // was the month incremented?
+                if (iMonth != dtNext.GetMonth())
+                    bIncremented = true;
+            }
         }
     }
 
-    // XXX
-    WXCLog::Do(dtNext.Format(), false);
+
+    // XXX WXCLog::Do(dtNext.Format(), false);
 
 
     // --- MONTH ---
     /* ATTENTION: Keep in mind, that crontab month can be values from 1 to 12
        but wxDateTime::Month store its month values from 0 to 11! */
 
-    iVal = month_.GetNextValue(dtNext.GetMonth()+1);
+    iInitial = dtCurrent.GetMonth() + 1;
 
-    // increment year?
-    if ( iVal < (dtNext.GetMonth()+1) )
-        dtNext.Add(wxDateSpan(1, 0, 0, 0));
+    if ( !(dtNext > dtCurrent && month_.HasThisValue(dtNext.GetMonth()+1, &iInitial)) )
+    {
+        if (bIncremented)
+        {
+            // decrement month
+            dtNext.Subtract(wxDateSpan(0, 1, 0, 0));
+            bIncremented = false;
+        }
 
-    // set month
-    dtNext.SetMonth((wxDateTime::Month)(iVal-1));
+        iVal = month_.GetNextValue(dtNext.GetMonth()+1);
 
-    // XXX
-    WXCLog::Do(dtNext.Format(), false);
+        // increment year?
+        if ( iVal < (dtNext.GetMonth()+1) )
+        {
+            dtNext.Add(wxDateSpan(1, 0, 0, 0));
+            bIncremented = true;
+        }
+
+        // set month
+        dtNext.SetMonth((wxDateTime::Month)(iVal-1));
+    }
 
     return dtNext;
 }

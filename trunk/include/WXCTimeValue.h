@@ -118,8 +118,9 @@ class WXCTimeValue
         /// Check if the value 'iValue' is in some of the ranges specified by 'vecpairRanges'
         static bool IsInRange (const short iValue, VectorPairShort vecpairRanges);
 
-        ///
-        bool HasThisValue (const short iValue);
+        /** Check if the value 'iValue' is possible.
+            The second parameter 'piInitialValue' is used when there are free-steps. */
+        bool HasThisValue (const short iValue, const short* piInitialValue = NULL);
         /** Calculate the next possible value from 'iCurrent' depending on the crontab parameter.
             On errors it return 'iCurrent'. */
         short GetNextValue (const short iCurrent);

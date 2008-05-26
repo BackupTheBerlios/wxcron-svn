@@ -65,6 +65,7 @@ class WXCCrontab
         static void CheckModification ();
 
         void XXX (const wxString& str, short iFrom, short iTo);
+        void YYY (const wxString& str);
 };
 
 #endif    // WXCCRONTAB_H

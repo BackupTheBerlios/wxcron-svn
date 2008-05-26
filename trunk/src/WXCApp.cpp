@@ -24,6 +24,7 @@
 #include "WXCApp.h"
 
 #include <wx/timer.h>
+#include <wx/snglinst.h>
 
 #include "WXCTaskBarIcon.h"
 #include "WXCCrontab.h"
@@ -35,6 +36,7 @@
 IMPLEMENT_APP(WXCApp);
 
 WXCApp::WXCApp ()
+      : pTaskBarIcon_(NULL)
 {
 }
 
@@ -68,6 +70,18 @@ WXCApp::WXCApp ()
     WXCLog::Do(wxEmptyString, false);
     WXCLog::Do(wxString::Format("%s started...", GetFullApplicationName()));
 
+    // check if another instance is running
+    wxSingleInstanceChecker* pChecker = new wxSingleInstanceChecker(wxString::Format("%s-%s",
+                                                                                     GetFullApplicationName(),
+                                                                                     wxGetUserId()));
+    if ( pChecker->IsAnotherRunning() )
+    {
+        wxString strErr(_("Another program instance is already running, aborting."));
+        wxLogError(strErr);
+        WXCLog::Do(strErr);
+        return false;
+    }
+
     // read the crontab file
     if ( !(WXCCrontab::Read()) )
         return false;
@@ -100,7 +114,9 @@ WXCApp::WXCApp ()
 {
     WXCLog::Do(wxString::Format("Close %s...\n", WXC_APP_NAME));
 
-    pTaskBarIcon_->RemoveIcon();
+    if (pTaskBarIcon_)
+        pTaskBarIcon_->RemoveIcon();
+
     return 1;
 }
 

@@ -353,7 +353,7 @@ bool WXCTimeValue::IsInRange (PairShort pairRange)
     return false;
 }
 
-bool WXCTimeValue::HasThisValue (const short iValue)
+bool WXCTimeValue::HasThisValue (const short iValue, const short* piInitialValue /* = NULL*/)
 {
     // --- unrestricted ---
     if ( !(IsRestricted()) && IsInRange(iValue) )
@@ -362,9 +362,42 @@ bool WXCTimeValue::HasThisValue (const short iValue)
     // --- free steps ---
     if ( iStepFree_ != -1 )
     {
-        // free steps (that means without a restricted(!) range
-        // match everytime if you count enough on them
-        return true;
+        if (piInitialValue)
+        {
+            // Just see the possible steps from '*piInitialValue' to 'pairValidRange_.second' !
+            // Of course we would match each value if we just count enough on it but in this
+            // case we don't take care of it.
+
+            short iV = *piInitialValue;
+
+            //
+            while ( IsInRange(iV) )
+            {
+                // is the equal?
+                if (iV == iValue)
+                    return true;
+
+                // step forwarde
+                iV = iV + iStepFree_;
+            }
+
+            // last step over border/max
+            iV = iV - iStepFree_;
+            iV = pairValidRange_.first + (iStepFree_ - (pairValidRange_.second - iV));
+
+            // is the equal?
+            if (iV == iValue)
+                return true;
+
+            // nothing match
+            return false;
+        }
+        else
+        {
+            // free steps (that means without a restricted(!) range
+            // match everytime if you count enough on them
+            return true;
+        }
     }
 
     // --- single values ---
@@ -428,7 +461,7 @@ short WXCTimeValue::GetNextValue (const short iCurrent)
     if ( iStepFree_ != -1 )
     {
         if ( iCurrent > (pairValidRange_.second-iStepFree_) )
-            iNext = pairValidRange_.first + (iStepFree_ - (pairValidRange_.second - iCurrent));
+            iNext = pairValidRange_.first + (iStepFree_ - (pairValidRange_.second - iCurrent) - 1);
         else
             iNext = iCurrent + iStepFree_;
 
