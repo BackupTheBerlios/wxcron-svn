@@ -508,13 +508,13 @@ short WXCTimeValue::GetNextValue (const short iCurrent)
                 {
                     iNext = iCurrent + 1;
 
-                    if ( IsInRange(iNext, vecpairRange_) )
+                    if ( IsInRange(iNext, vecpairRange_) && IsInRange(iNext) )
                         return iNext;
                 }
             }
         }
 
-        if (iNext > (*(vecpairRange_.begin())).second)
+        if (iNext > (*(vecpairRange_.begin())).second || iNext > pairValidRange_.second)
             return (*(vecpairRange_.begin())).first;
     }
 
@@ -528,10 +528,7 @@ short WXCTimeValue::GetNextValue (const short iCurrent)
         // over range
         if ( iCurrent > (iTo - iStep) )
         {
-            if (iCurrent >= iTo)
-                iNext = iFrom;
-            else
-                iNext = iTo;
+            iNext = iFrom;
         }
         else
         {

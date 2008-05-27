@@ -24,80 +24,29 @@
 #ifndef WXCJOB_H
 #define WXCJOB_H
 
-#include <vector>
 #include <wx/string.h>
 #include <wx/datetime.h>
+#include "WXCTime.h"
 
-// forewarde
+// foreward
 class WXCTimer;
 
 ///
 class WXCJob
 {
     private:
-        ///
-        typedef std::vector<long>       longVector;
-        ///
-        typedef longVector::iterator    longVectorIt;
-
-    private:
         /// to identify the crontab-line for the user on error messages
         long                    lLine_;
         ///
         WXCTimer*               pTimer_;
-        /// XXX
+        ///
         wxString                strOriginalLine_;
 
-        /// minute
-        longVector              minute_;
-        /// hour
-        longVector              hour_;
-        /// day
-        longVector              day_;
-        /** month
-            ATTENTION: Keep in mind, that crontab month can be values from 1 to 12
-            but wxDateTime::Month store its month values from 0 to 11! */
-        longVector              month_;
-        /// day of week
-        longVector              weekday_;
+        ///
+        WXCTime                 time_;
 
         /// the command to execute
         wxString                strCommand_;
-
-        /// parse 'strOriginal_'
-        void Parse (const wxString& strOriginalLine);
-
-        /// parse the 'str' for crontab-like values and store them in a longVector
-        void Parse (const wxString& str,
-                    longVector& rVec,
-                    int iRangeFrom,
-                    int iRangeTo,
-                    int iCurrValue);
-
-        ///
-        void FillValues (longVector& rVec,
-                         int iRangeFrom,
-                         int iRangeTo,
-                         int iSteps);
-
-        ///
-        static long GetNextValue (longVector& rVec, long lCurrentValue);
-        ///
-        static bool HasThisValue (longVector& rVec, long lCurrentValue);
-
-        /** Calculate based on the five time values-lists
-            (minute_, hour_, day_, month_, weekday_) what is
-            the next possible time and return it. */
-        wxDateTime CalculateNextTime (const wxDateTime& dtNow = wxDateTime::Now());
-
-        ///
-        bool SetNextMinute (wxDateTime& dt);
-        ///
-        bool SetNextHour (wxDateTime& dt);
-        ///
-        bool SetNextDay (wxDateTime& dt);
-        ///
-        bool SetNextMonth (wxDateTime& dt);
 
     public:
         /// ctor

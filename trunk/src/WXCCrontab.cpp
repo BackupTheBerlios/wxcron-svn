@@ -115,6 +115,7 @@ WXCCrontab::WXCCrontab ()
     }
 }
 
+// XXX
 #include "WXCTimeValue.h"
 #include "WXCTime.h"
 
@@ -148,11 +149,11 @@ void WXCCrontab::YYY (const wxString& str)
     wxDateTime dt(19, wxDateTime::May, 2008, 12, 54, 37);
     wxDateTime dtNext(dt);
 
-    WXCLog::Do(str);
-    for (short i = 0; i < 100; ++i)
+    WXCLog::Do(str, false);
+    for (short i = 0; i < 500; ++i)
     {
         dtNext = t.GetNext(dt);
-        WXCLog::Do(wxString::Format("%d;\tCURRENT: %s => NEXT: %s",
+        WXCLog::Do(wxString::Format("%d;  CURRENT: %s => NEXT: %s",
                                i,
                                dt.Format(),
                                dtNext.Format()), false);
@@ -164,10 +165,45 @@ void WXCCrontab::YYY (const wxString& str)
 
 void WXCCrontab::Start ()
 {
-    YYY("30   1   5 * *");
-    YYY("30   1   */5 * *");
-    YYY("30   1   3,14 * *");
-    YYY("30   1   5-20/3 * *");
+    //OK YYY("5 * * * *");
+    //OK YYY("*/5 * * * *");
+    //OK YYY("5,45 * * * *");
+    //OK YYY("5-50/7 * * * *");
+
+    //OK YYY("* 5 * * *");
+    //OK YYY("* */5  * * *");
+    //OK YYY("* 5,13  * * *");
+    //OK YYY("* 6-22/4  * * *");
+
+    //OK YYY("30   1   5 * *");
+    //OK YYY("30   1   */5 * *");
+    //OK YYY("30   1   3,14 * *");
+    //OK YYY("30   1   5-21/3 * *");
+
+    //OK YYY("0 0 * 5 * ");
+    //OK YYY("0 0 * */5 *");
+    //OK YYY("0 0 * 5,10  *");
+    //OK YYY("0 0 * 2-9/3 *");
+
+    //OK YYY("0 0 * * 5");
+    //OK YYY("0 0 * * */2 ");
+    //OK YYY("0 0 * * 1,5 ");
+    //OK YYY("0 0 * * 1-5/2");
+
+    //OK YYY("0 0 10-30 * 5");
+    //OK YYY("0 0 10 * */2 ");
+    //OK YYY("0 0 10,16 * 1,5 ");
+    //OK YYY("0 0 22,28 * 1-5/2");
+
+    //OK YYY("17 *    * * *");
+    //OK YYY("25 11   * * *");
+    //OK YYY("47 12   * * 7");
+    //OK YYY("52 13   1 * *");
+    //OK YYY("50 10   * * *");
+    //??? YYY("3/17 *  * * *");
+    //OK YYY("22 */4  * * *");
+    //OK YYY("*/9 *   * * *");
+
     return;
 
     for (WXCJobVectorIt it = vecJobs_.begin();

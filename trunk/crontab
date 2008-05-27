@@ -1,1 +1,13 @@
-33   7   * * 3    calc.exe
+#M    S   T M W    Befehl
+# jede Stunde zu x:05
+5     *   * * *    calc.exe
+# alle 5 Minuten
+*/10   *   * * *    calc.exe
+# sonntags(0) 23:59
+59    23  * * 0    calc.exe
+# täglich 0:00
+0     0   * * *    calc.exe
+# um 3:00 Uhr jeden 7. des Monats oder Donnerstags
+0     3   7 * 4    calc.exe
+# montag(1) bis freitags(5) 1:20 und 1:30
+20,30 1   * * 1-5  calc.exe

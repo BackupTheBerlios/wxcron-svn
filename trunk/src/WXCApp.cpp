@@ -25,6 +25,8 @@
 
 #include <wx/timer.h>
 #include <wx/snglinst.h>
+#include <wx/fileconf.h>
+#include <wx/wfstream.h>
 
 #include "WXCTaskBarIcon.h"
 #include "WXCCrontab.h"
@@ -66,6 +68,17 @@ WXCApp::WXCApp ()
 
 /*virtual*/ bool WXCApp::OnInit()
 {
+    wxFileInputStream is("test");
+    wxFileConfig* pConfig = new wxFileConfig(is);
+
+    pConfig->Write("gruppeA/key1", 77);
+    pConfig->Write("test/key2", "siebenundsiebzig");
+    pConfig->Write("key3", 7.7);
+    pConfig->Write("gruppeA/key4", true);
+
+    wxFileOutputStream os("test");
+    pConfig->Save(os);
+
     // log start
     WXCLog::Do(wxEmptyString, false);
     WXCLog::Do(wxString::Format("%s started...", GetFullApplicationName()));

@@ -78,7 +78,7 @@ class WXCTime
         bool IsValid ();
 
         ///
-        wxDateTime GetNext (const wxDateTime& dtCurrent);
+        wxDateTime GetNext (const wxDateTime& dtCurrent = wxDateTime::Now());
 };
 
 #endif    // WXCTIME_H
