@@ -29,6 +29,8 @@ class WXCTaskBarIcon;
 
 #include <wx/wx.h>
 
+#include "WXCConfig.h"
+
 ///
 class WXCApp : public wxApp
 {

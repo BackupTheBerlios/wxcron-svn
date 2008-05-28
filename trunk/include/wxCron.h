@@ -31,8 +31,8 @@
 #define WXC_AUTHOR                  "Christian Buhtz"
 
 #define WXC_CRONTAB                 "crontab"
+#define WXC_CONFIG                  "wxCron.conf"
 #define WXC_LOG                     "wxCron.log"
 #define WXC_LOG_OLD                 "wxCron.log.old"
-#define WXC_LOG_MAXSIZE             1024*1024
 
 #endif

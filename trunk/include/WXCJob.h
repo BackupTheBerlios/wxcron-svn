@@ -57,6 +57,11 @@ class WXCJob
 
         ///
         void Start ();
+
+        ///
+        const wxString& GetOriginalLine ();
+        ///
+        long GetLine ();
 };
 
 typedef std::vector<WXCJob>         WXCJobVector;

@@ -41,6 +41,9 @@ class WXCLog
         /// direct interface to the log file
         wxFile                  fileLog_;
 
+        ///
+        wxString                strLastMessage_;
+
         /** take care that size of the logfile is not to big */
         void CareSize ();
 
@@ -62,6 +65,9 @@ class WXCLog
 
         /// log a message
         static void Do(const wxString& str, bool bWithTimestamp = true);
+
+        ///
+        static const wxString& GetLastMessage ();
 };
 
 #endif    // WXCLOG_H

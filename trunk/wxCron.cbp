@@ -101,6 +101,7 @@
 		<Unit filename="TODO" />
 		<Unit filename="crontab" />
 		<Unit filename="include\WXCApp.h" />
+		<Unit filename="include\WXCConfig.h" />
 		<Unit filename="include\WXCCrontab.h" />
 		<Unit filename="include\WXCJob.h" />
 		<Unit filename="include\WXCLog.h" />
@@ -110,6 +111,7 @@
 		<Unit filename="include\WXCTimer.h" />
 		<Unit filename="include\wxCron.h" />
 		<Unit filename="src\WXCApp.cpp" />
+		<Unit filename="src\WXCConfig.cpp" />
 		<Unit filename="src\WXCCrontab.cpp" />
 		<Unit filename="src\WXCJob.cpp" />
 		<Unit filename="src\WXCLog.cpp" />

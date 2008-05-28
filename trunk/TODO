@@ -2,7 +2,6 @@
   first test it with an about dialog
 - maybe separate the GUI (taskbar-icon) complete?
 - about dialog
-- settings file
 - settings: max log-file size
 - settings: interval check for crontab (in minutes, only on start)
 - implement settings dialog

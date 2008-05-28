@@ -57,10 +57,8 @@ WXCCrontab::WXCCrontab ()
     // remember modification time
     Instance().timeMod_ = wxFileName(WXC_CRONTAB).GetModificationTime();
 
-    // clear job vector
+    // clear job vector and their timers
     Instance().vecJobs_.clear();
-
-    // TODO XXX clear old timers!!!
 
     // line counter
     long lLine = 1;
@@ -115,7 +113,7 @@ WXCCrontab::WXCCrontab ()
     }
 }
 
-// XXX
+/* XXX
 #include "WXCTimeValue.h"
 #include "WXCTime.h"
 
@@ -162,7 +160,7 @@ void WXCCrontab::YYY (const wxString& str)
     }
     WXCLog::Do(wxEmptyString, false);
 }
-
+*/
 void WXCCrontab::Start ()
 {
     //OK YYY("5 * * * *");
@@ -204,7 +202,7 @@ void WXCCrontab::Start ()
     //OK YYY("22 */4  * * *");
     //OK YYY("*/9 *   * * *");
 
-    return;
+    //return;
 
     for (WXCJobVectorIt it = vecJobs_.begin();
          it != vecJobs_.end();

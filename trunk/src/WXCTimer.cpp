@@ -74,6 +74,9 @@ void WXCTimer::Notify ()
     }
     else
     {
+        WXCLog::Do(wxString::Format("Execute Job. (\"%s\" crontab-line: %d)",
+                                    pParentJob_->GetOriginalLine(),
+                                    pParentJob_->GetLine()));
         wxExecute(strCommand_, wxEXEC_ASYNC);
         pParentJob_->Start();
     }

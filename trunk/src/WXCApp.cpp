@@ -25,8 +25,6 @@
 
 #include <wx/timer.h>
 #include <wx/snglinst.h>
-#include <wx/fileconf.h>
-#include <wx/wfstream.h>
 
 #include "WXCTaskBarIcon.h"
 #include "WXCCrontab.h"
@@ -68,17 +66,6 @@ WXCApp::WXCApp ()
 
 /*virtual*/ bool WXCApp::OnInit()
 {
-    wxFileInputStream is("test");
-    wxFileConfig* pConfig = new wxFileConfig(is);
-
-    pConfig->Write("gruppeA/key1", 77);
-    pConfig->Write("test/key2", "siebenundsiebzig");
-    pConfig->Write("key3", 7.7);
-    pConfig->Write("gruppeA/key4", true);
-
-    wxFileOutputStream os("test");
-    pConfig->Save(os);
-
     // log start
     WXCLog::Do(wxEmptyString, false);
     WXCLog::Do(wxString::Format("%s started...", GetFullApplicationName()));
@@ -102,19 +89,23 @@ WXCApp::WXCApp ()
     // start it !
     WXCCrontab::Instance().Start ();
 
-    // check crontab for modifications periodicly
-    wxTimer* pTimer = new wxTimer(this, WXC_APP_ID_TIMER_CRONTAB);
+    // check crontab for modifications periodicly?
+    if (WXCConfig::Instance().GetCheckCrontabIntervallInMinutes() > 0)
+    {
+        wxTimer* pTimer = new wxTimer(this, WXC_APP_ID_TIMER_CRONTAB);
 
-    Connect
-    (
-        WXC_APP_ID_TIMER_CRONTAB,
-        wxEVT_TIMER,
-        wxTimerEventHandler(WXCApp::OnTimer_CheckCrontab),
-        NULL,
-        this
-    );
+        Connect
+        (
+            WXC_APP_ID_TIMER_CRONTAB,
+            wxEVT_TIMER,
+            wxTimerEventHandler(WXCApp::OnTimer_CheckCrontab),
+            NULL,
+            this
+        );
 
-    pTimer->Start(1000*60, wxTIMER_CONTINUOUS);
+        pTimer->Start(1000 * 60 * WXCConfig::Instance().GetCheckCrontabIntervallInMinutes(),
+                      wxTIMER_CONTINUOUS);
+    }
 
     // create systray icon
     pTaskBarIcon_ = new WXCTaskBarIcon();

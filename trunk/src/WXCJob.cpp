@@ -61,3 +61,13 @@ void WXCJob::Start ()
     // start the timer
     pTimer_->Start(time_.GetNext());
 }
+
+const wxString& WXCJob::GetOriginalLine ()
+{
+    return strOriginalLine_;
+}
+
+long WXCJob::GetLine ()
+{
+    return lLine_;
+}

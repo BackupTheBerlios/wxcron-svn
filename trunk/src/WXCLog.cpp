@@ -25,13 +25,14 @@
 
 #include <wx/datetime.h>
 
+#include "WXCConfig.h"
 #include "wxCron.h"
 
 /*static*/ WXCLog WXCLog::sLog_;
 
 
 WXCLog::WXCLog ()
-      : lMaxSize_(WXC_LOG_MAXSIZE),
+      : lMaxSize_(WXCConfig::Instance().GetMaxLogFileSizeInKB()*1024),
         fileLog_(WXC_LOG, wxFile::write_append)
 {
     CareSize();
@@ -90,4 +91,12 @@ void WXCLog::CareSize ()
 
     // write to the file
     Instance().fileLog_.Write(strLog);
+
+    // remember
+    Instance().strLastMessage_ = strLog;
+}
+
+/*static*/ const wxString& WXCLog::GetLastMessage ()
+{
+    return Instance().strLastMessage_;
 }
