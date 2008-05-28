@@ -27,6 +27,7 @@
 
 #include "WXCApp.h"
 #include "WXCConfigDlg.h"
+#include "WXCAboutDlg.h"
 #include "wxCron.h"
 
 #define WXC_TASKBARICON_ID_CLOSE        1 + wxID_HIGHEST
@@ -75,7 +76,7 @@ void WXCTaskBarIcon::OnMenuClose (wxCommandEvent& rEvent)
 
 void WXCTaskBarIcon::OnMenuAbout (wxCommandEvent& rEvent)
 {
-    wxMessageBox("ABOUT");
+    new WXCAboutDlg();
 }
 
 void WXCTaskBarIcon::OnMenuSettings (wxCommandEvent& rEvent)

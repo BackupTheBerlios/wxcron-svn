@@ -100,10 +100,12 @@
 		<Unit filename="README" />
 		<Unit filename="TODO" />
 		<Unit filename="crontab" />
+		<Unit filename="include\WXCAboutDlg.h" />
 		<Unit filename="include\WXCApp.h" />
 		<Unit filename="include\WXCConfig.h" />
 		<Unit filename="include\WXCConfigDlg.h" />
 		<Unit filename="include\WXCCrontab.h" />
+		<Unit filename="include\WXCHyperlinkCtrl.h" />
 		<Unit filename="include\WXCJob.h" />
 		<Unit filename="include\WXCLog.h" />
 		<Unit filename="include\WXCTaskBarIcon.h" />
@@ -111,10 +113,12 @@
 		<Unit filename="include\WXCTimeValue.h" />
 		<Unit filename="include\WXCTimer.h" />
 		<Unit filename="include\wxCron.h" />
+		<Unit filename="src\WXCAboutDlg.cpp" />
 		<Unit filename="src\WXCApp.cpp" />
 		<Unit filename="src\WXCConfig.cpp" />
 		<Unit filename="src\WXCConfigDlg.cpp" />
 		<Unit filename="src\WXCCrontab.cpp" />
+		<Unit filename="src\WXCHyperlinkCtrl.cpp" />
 		<Unit filename="src\WXCJob.cpp" />
 		<Unit filename="src\WXCLog.cpp" />
 		<Unit filename="src\WXCTaskBarIcon.cpp" />
