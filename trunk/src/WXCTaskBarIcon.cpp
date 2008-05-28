@@ -26,6 +26,7 @@
 #include <wx/menu.h>
 
 #include "WXCApp.h"
+#include "WXCConfigDlg.h"
 #include "wxCron.h"
 
 #define WXC_TASKBARICON_ID_CLOSE        1 + wxID_HIGHEST
@@ -79,7 +80,7 @@ void WXCTaskBarIcon::OnMenuAbout (wxCommandEvent& rEvent)
 
 void WXCTaskBarIcon::OnMenuSettings (wxCommandEvent& rEvent)
 {
-    wxMessageBox("SETTINGS");
+    new WXCConfigDlg();
 }
 
 void WXCTaskBarIcon::OnClick(wxTaskBarIconEvent& rEvent)

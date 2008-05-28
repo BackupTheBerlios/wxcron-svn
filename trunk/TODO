@@ -6,6 +6,8 @@
 - settings: interval check for crontab (in minutes, only on start)
 - implement settings dialog
 - systray icon optional (maybe disapear after 10 sec) ?
+- SettingsDlg: improve with checkboxex for 0 values
+- use a HelpCtrl
 - DO ALL TESTS AGAIN !!!
 
 cron-manpage: http://unixhelp.ed.ac.uk/CGI/man-cgi?cron+8
