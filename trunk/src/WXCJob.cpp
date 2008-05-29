@@ -27,6 +27,7 @@
 #include <wx/log.h>
 #include "WXCTimer.h"
 #include "WXCLog.h"
+#include "WXCTimestampFile.h"
 
 
 WXCJob::WXCJob (const wxString& strOriginalLine, long lLine)
@@ -52,18 +53,46 @@ void WXCJob::Start ()
 {
     // old timer there?
     if (pTimer_)
-    {
         pTimer_->Stop();
-        pTimer_->SetCommand(strCommand_);
-    }
     else
+        pTimer_ = new WXCTimer(this);
+
+    // get last execution
+    wxDateTime dt = WXCTimestampFile::Instance().GetLast(GetOriginalLine());
+
+    if ( dt.IsValid() )
     {
-        pTimer_ = new WXCTimer(this, strCommand_);
+        // catch up the job
+        if ( time_.GetNext(dt) < wxDateTime::Now() )
+        {
+            Execute();
+            return;
+        }
     }
 
     // start the timer
     pTimer_->Start(time_.GetNext());
 }
+
+
+void WXCJob::Execute ()
+{
+    // log execution
+    WXCLog::Do(wxString::Format("Execute Job. (\"%s\" crontab-line: %d)",
+                                GetOriginalLine(),
+                                GetLine()));
+
+    // remember timestamp
+    WXCTimestampFile::Instance().Set(GetOriginalLine());
+    WXCTimestampFile::Instance().Save();
+
+    // execute
+    wxExecute(strCommand_, wxEXEC_ASYNC);
+
+    // restart job
+    Start();
+}
+
 
 const wxString& WXCJob::GetOriginalLine ()
 {

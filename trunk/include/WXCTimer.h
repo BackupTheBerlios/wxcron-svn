@@ -37,9 +37,6 @@ class WXCTimer : public wxTimer
         ///
         WXCJob*             pParentJob_;
 
-        /// command to execute
-        wxString            strCommand_;
-
         /** In normal cases this value is not used. It should be wxInvalidDateTime then.
             But if the intervall between wxDateTime::Now() and 'timeNextWakeUp_' is
             in milliseconds higher than a signed integer can store (INT_MAX) it is used.
@@ -48,13 +45,10 @@ class WXCTimer : public wxTimer
 
     public:
         /// ctor
-        WXCTimer (WXCJob* pParentJob, const wxString& strCommand);
+        WXCTimer (WXCJob* pParentJob);
 
         /// virtual dtor
         virtual ~WXCTimer ();
-
-        ///
-        void SetCommand (const wxString& strCommand);
 
         ///
         bool Start (const wxDateTime& timeNextWakeUp);

@@ -2,6 +2,5 @@
 <CodeBlocks_workspace_file>
 	<Workspace title="wxCron">
 		<Project filename="wxCron.cbp" active="1" />
-		<Project filename="..\..\blackfisk\trunk\blackfisk.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>

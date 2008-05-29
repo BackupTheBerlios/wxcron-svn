@@ -59,6 +59,9 @@ class WXCJob
         void Start ();
 
         ///
+        void Execute ();
+
+        ///
         const wxString& GetOriginalLine ();
         ///
         long GetLine ();

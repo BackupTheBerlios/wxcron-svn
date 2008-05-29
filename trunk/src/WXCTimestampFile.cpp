@@ -74,6 +74,21 @@ void WXCTimestampFile::Set(const wxString& strOriginalLine, const wxDateTime& dt
     vecTimestamps_.push_back(PairTimeString(dt, strOriginalLine));
 }
 
+
+wxDateTime WXCTimestampFile::GetLast (const wxString& strOriginalLine)
+{
+    for (VecPairTimeString::iterator it = vecTimestamps_.begin();
+         it != vecTimestamps_.end();
+         ++it)
+    {
+        if ( (*it).second == strOriginalLine )
+            return (*it).first;
+    }
+
+    return wxInvalidDateTime;
+}
+
+
 bool WXCTimestampFile::Read ()
 {
     // clear all timestamps

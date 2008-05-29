@@ -29,21 +29,16 @@
 #include "WXCJob.h"
 #include "WXCTimestampFile.h"
 
-WXCTimer::WXCTimer (WXCJob* pParentJob,
-                    const wxString& strCommand)
-        : pParentJob_(pParentJob),
-          strCommand_(strCommand)
+WXCTimer::WXCTimer (WXCJob* pParentJob)
+        : pParentJob_(pParentJob)
 {
 }
+
 
 /*virtual*/ WXCTimer::~WXCTimer ()
 {
 }
 
-void WXCTimer::SetCommand (const wxString& strCommand)
-{
-    strCommand_ = strCommand;
-}
 
 bool WXCTimer::Start (const wxDateTime& timeNextWakeUp)
 {
@@ -76,19 +71,7 @@ void WXCTimer::Notify ()
     }
     else
     {
-        // log execution
-        WXCLog::Do(wxString::Format("Execute Job. (\"%s\" crontab-line: %d)",
-                                    pParentJob_->GetOriginalLine(),
-                                    pParentJob_->GetLine()));
-
-        // remember timestamp
-        WXCTimestampFile::Instance().Set(pParentJob_->GetOriginalLine());
-        WXCTimestampFile::Instance().Save();
-
-        // execute
-        wxExecute(strCommand_, wxEXEC_ASYNC);
-
-        // restart job
-        pParentJob_->Start();
+        // execute job
+        pParentJob_->Execute();
     }
 }

@@ -6,6 +6,7 @@
 - use a HelpCtrl
 - DO ALL TESTS AGAIN !!!
 
+"taskkill /F /IM extern.exe"
 fcron: http://fcron.free.fr/doc/en/fcrontab.5.html
 cron-manpage: http://unixhelp.ed.ac.uk/CGI/man-cgi?cron+8
 crontab(5)-manpage: http://unixhelp.ed.ac.uk/CGI/man-cgi?crontab+5

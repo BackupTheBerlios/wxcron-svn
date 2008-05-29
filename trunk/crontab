@@ -1,13 +1,14 @@
+# just a sample crontab
 #M    S   T M W    Befehl
-# jede Stunde zu x:03
-5     *   * * *    calc.exe
-# alle 5 Minuten
-*/1   *   * * *    calc.exe
-# sonntags(0) 23:59
+# each hour 3. minute
+3     *   * * *    calc.exe
+# 5 minute intervals
+*/5   *   * * *    calc.exe
+# wendsday 11:38
 38    11  * * 3    calc.exe
-# täglich 0:00
+# each midnight 0:00
 0     0   * * *    calc.exe
-# um 3:00 Uhr jeden 7. des Monats oder Donnerstags
+# each thursday OR 7. of a month at 3:00 a'clock
 0     3   7 * 4    calc.exe
-# montag(1) bis freitags(5) 1:20 und 1:30
-20,30 1   * * 1-5  calc.exe
+# monday till friday 1:20 and 1:30
+20,50 1   * * 1-5  calc.exe

@@ -61,6 +61,10 @@ class WXCTimestampFile
         ///
         void Set(const wxString& strOriginalLine, const wxDateTime& dt = wxDateTime::Now());
 
+        /** Return the last timestmap for the givin crontabl-line. If there
+            is no timestamp it return wxInvalidDateTime. */
+        wxDateTime GetLast (const wxString& strOriginalLine);
+
         ///
         bool Read ();
         ///
