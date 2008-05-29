@@ -113,6 +113,20 @@ WXCCrontab::WXCCrontab ()
     }
 }
 
+bool WXCCrontab::HasLine (const wxString& strLine)
+{
+    for (WXCJobVectorIt it = vecJobs_.begin();
+         it != vecJobs_.end();
+         ++it)
+    {
+        if ( (*it).GetOriginalLine() == strLine )
+            return true;
+    }
+
+    return false;
+}
+
+
 /* XXX
 #include "WXCTimeValue.h"
 #include "WXCTime.h"

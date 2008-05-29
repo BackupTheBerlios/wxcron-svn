@@ -1,15 +1,12 @@
 - exclude extras (e.g. settings) in a separate binary
   first test it with an about dialog
 - maybe separate the GUI (taskbar-icon) complete?
-- about dialog
-- settings: max log-file size
-- settings: interval check for crontab (in minutes, only on start)
-- implement settings dialog
 - systray icon optional (maybe disapear after 10 sec) ?
 - SettingsDlg: improve with checkboxex for 0 values
 - use a HelpCtrl
 - DO ALL TESTS AGAIN !!!
 
+fcron: http://fcron.free.fr/doc/en/fcrontab.5.html
 cron-manpage: http://unixhelp.ed.ac.uk/CGI/man-cgi?cron+8
 crontab(5)-manpage: http://unixhelp.ed.ac.uk/CGI/man-cgi?crontab+5
 crontab(8)-manpage: http://unixhelp.ed.ac.uk/CGI/man-cgi?crontab

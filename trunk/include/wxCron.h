@@ -34,5 +34,6 @@
 #define WXC_CONFIG                  "wxCron.conf"
 #define WXC_LOG                     "wxCron.log"
 #define WXC_LOG_OLD                 "wxCron.log.old"
+#define WXC_TIMESTAMP               "wxCron.tsmp"
 
 #endif

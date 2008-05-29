@@ -32,9 +32,12 @@
 WXCJob::WXCJob (const wxString& strOriginalLine, long lLine)
       : lLine_(lLine),
         pTimer_(NULL),
+        strOriginalLine_(strOriginalLine),
         time_(strOriginalLine)
 {
     strCommand_ = time_.GetUnparsed();
+    strCommand_.Trim(true);
+    strCommand_.Trim(false);
 }
 
 

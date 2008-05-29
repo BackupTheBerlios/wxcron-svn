@@ -112,6 +112,7 @@
 		<Unit filename="include\WXCTime.h" />
 		<Unit filename="include\WXCTimeValue.h" />
 		<Unit filename="include\WXCTimer.h" />
+		<Unit filename="include\WXCTimestampFile.h" />
 		<Unit filename="include\wxCron.h" />
 		<Unit filename="src\WXCAboutDlg.cpp" />
 		<Unit filename="src\WXCApp.cpp" />
@@ -125,6 +126,7 @@
 		<Unit filename="src\WXCTime.cpp" />
 		<Unit filename="src\WXCTimeValue.cpp" />
 		<Unit filename="src\WXCTimer.cpp" />
+		<Unit filename="src\WXCTimestampFile.cpp" />
 		<Unit filename="wxCron.log" />
 		<Unit filename="wxCron.rc">
 			<Option compilerVar="WINDRES" />

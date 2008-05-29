@@ -29,6 +29,7 @@
 #include "WXCTaskBarIcon.h"
 #include "WXCCrontab.h"
 #include "WXCLog.h"
+#include "WXCTimestampFile.h"
 #include "wxCron.h"
 
 #define WXC_APP_ID_TIMER_CRONTAB    1 + wxID_HIGHEST
@@ -85,6 +86,9 @@ WXCApp::WXCApp ()
     // read the crontab file
     if ( !(WXCCrontab::Read()) )
         return false;
+
+    // read the timestamps
+    WXCTimestampFile::Instance().Read();
 
     // start it !
     WXCCrontab::Instance().Start ();

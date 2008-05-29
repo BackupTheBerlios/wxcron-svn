@@ -1,10 +1,10 @@
 #M    S   T M W    Befehl
-# jede Stunde zu x:05
+# jede Stunde zu x:03
 5     *   * * *    calc.exe
 # alle 5 Minuten
-*/10   *   * * *    calc.exe
+*/1   *   * * *    calc.exe
 # sonntags(0) 23:59
-59    23  * * 0    calc.exe
+38    11  * * 3    calc.exe
 # täglich 0:00
 0     0   * * *    calc.exe
 # um 3:00 Uhr jeden 7. des Monats oder Donnerstags

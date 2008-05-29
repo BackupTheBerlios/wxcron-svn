@@ -60,6 +60,9 @@ class WXCCrontab
         /// start all jobs
         void Start ();
 
+        ///
+        bool HasLine (const wxString& strLine);
+
         /** Check if the crontab file was modifide since the
             last read and read it again if needed. */
         static void CheckModification ();
