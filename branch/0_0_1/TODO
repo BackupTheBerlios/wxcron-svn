@@ -1,0 +1,90 @@
+- exclude extras (e.g. settings) in a separate binary
+  first test it with an about dialog
+- maybe separate the GUI (taskbar-icon) complete?
+- systray icon optional (maybe disapear after 10 sec) ?
+- SettingsDlg: improve with checkboxex for 0 values
+- use a HelpCtrl
+- DO ALL TESTS AGAIN !!!
+
+"taskkill /F /IM extern.exe"
+fcron: http://fcron.free.fr/doc/en/fcrontab.5.html
+cron-manpage: http://unixhelp.ed.ac.uk/CGI/man-cgi?cron+8
+crontab(5)-manpage: http://unixhelp.ed.ac.uk/CGI/man-cgi?crontab+5
+crontab(8)-manpage: http://unixhelp.ed.ac.uk/CGI/man-cgi?crontab
+
+Newsgroups: de.comp.os.unix.misc
+From: "Peter J. Holzer" <hjp-usenet2@hjp.at>
+Subject: Re: [anacron] =?UTF-8?Q?Ausf=C3=BChrung?= bedingt merken?
+References: <69tkgbF35ch6kU1@mid.individual.net>
+ <slrng3j9t5.5fg.hschlen@humbert.ddns.org>
+ <69u1jmF34l536U1@mid.individual.net>
+ <slrng3jt51.k7a.hjp-usenet2@hrunkner.hjp.at>
+ <69v9eeF33c5epU1@mid.individual.net>
+ <slrng3o34l.mdo.hjp-usenet2@hrunkner.hjp.at>
+ <6a2hneF351t0pU1@mid.individual.net>
+Date: Tue, 27 May 2008 21:37:55 +0200
+User-Agent: slrn/pre0.9.9-69 (Linux)
+Mime-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: 8bit
+Message-ID: <slrng3oooj.16o.hjp-usenet2@hrunkner.hjp.at>
+NNTP-Posting-Host: zeno.hjp.at
+X-Trace: 27 May 2008 19:43:02 GMT, zeno.hjp.at
+Lines: 54
+Path: uni-berlin.de!fu-berlin.de!news.albasani.net!news.wsr.ac.at!zeno.hjp.at!news
+Xref: uni-berlin.de de.comp.os.unix.misc:19695
+
+On 2008-05-27 13:44, Christian Buhtz <exsudat@gmx.de> wrote:
+> Peter J. Holzer schrieb:
+>> (wxCron anzusehen ist mir zu mühsam. Doku habe ich auf der Website keine
+>> gefunden,
+>
+> Is ja auch noch nicht fertig.
+>
+> > Das müsste schon zusätzliche Features
+>> bieten, wie z.B. vernünftiges Queue-Management)
+>
+> Interessant. Könntest du das bitte näher erleutern - vielleicht kann ich
+> es auf die TODO-Liste setzen.
+
+Im Crontab-File kann man nur Zeiten exakt angeben - sowas wie
+"irgendwann zwischen Mitternacht und 8 Uhr" gibt es nicht.
+
+Der Vixie-Cron startet jeden Job genau zum angegebenen Zeitpunkt. Wenn
+auf einem System 57 Jobs mit "0 0 * * *" in den Crontabs stehen, dann
+werden täglich pünktlich um Mitternacht 57 Jobs gestartet, und das
+System wird unter Umständen etwas in die Knie gehen. Nicht ideal.
+
+Der HP-UX-Cron macht das etwas anders: Er legt die 57 Jobs in eine Queue
+und arbeitet die dann mit konfigurierbarer Parallelität ab. Hat man z.B.
+Parallelität 5 konfiguriert, wird er nur 5 Jobs um Mitternacht starten,
+und jedesmal, wenn einer fertig wird, kommt der nächste dran. Klingt
+besser, hat aber auch einen Haken: Angenommen, ich habe einen Job, der
+alle 5 Minuten laufen sollte. Um 00:05 ist die Queue mit 57 Jobs aber
+noch nicht abgearbeitet, also muss sich der Job "hinten anstellen". um
+00:10 wiederholt sich das Spiel. Es kann also passieren, dass ein Job,
+der eigentlich regelmäßig alle 5 Minuten laufen sollte, unter Umständen
+2 Stunden gar nicht läuft und dann innerhalb vonb 5 Sekunden 24 mal
+ausgeführt wird. Auch nicht ideal.
+
+Was man bräuchte, wäre idealerweise ein System, das selber intelligent
+genug ist, zu merken, dass ein Job, der eine Periode von 5 Minuten hat,
+nicht auf einen Job warten kann, der eine Stunde dauert. Da das aber
+etwas schwierig ist (woher soll das System wissen, wie lange ein Job
+noch laufen wird?) sollte man so Dinge konfigurieren können wie
+"irgendwann nach Mitternacht", "alle 5 Minuten einmal, aber der exakte
+Zeitpunkt ist nicht so wichtig", "Bitte exakt um 00:05:00", "einmal in
+der Stunde, aber wenn der vorige Job noch läuft, soll kein neuer
+gestartet werden", etc. fcron geht ja ziemlich in die Richtung, und
+verwendet ein recht komplexes Fileformat, um diverse Optionen ausdrücken
+zu können (es ist also kein(!) cron-Klon).
+
+
+In der Praxis haben sich die Linux-Distributionen ein primitives
+Queuing-System mit den cron.{hourly,daily,weekly} Directories
+geschaffen: Jedes dieser Directories wird sequentiell abgearbeitet, aber
+die Directories (und alle anderen Crontab-Einträge) parallel. Der Bedarf
+nach einem guten Queuing-System ist daher (zumindest für mich) nicht
+sonderlich hoch.
+
+	hp
