@@ -109,7 +109,11 @@ WXCCrontab::WXCCrontab ()
         WXCLog::Do("crontab was modified. Read it again...");
 
         if ( !(Read()) )
+            // error while reading - close wxCron
             wxGetApp().DoClose();
+        else
+            // start the jobs again
+            Instance().Start ();
     }
 }
 

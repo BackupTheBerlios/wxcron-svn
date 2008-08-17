@@ -1,3 +1,11 @@
+- generate a default wxcron.conf with # comments
+
+- while execution change working dir to the command
+
+- add publictimestamp.org to credits
+- add 7zip to credits
+- add IcoFX to credits
+
 - exclude extras (e.g. settings) in a separate binary
   first test it with an about dialog
 - maybe separate the GUI (taskbar-icon) complete?
@@ -11,6 +19,10 @@ fcron: http://fcron.free.fr/doc/en/fcrontab.5.html
 cron-manpage: http://unixhelp.ed.ac.uk/CGI/man-cgi?cron+8
 crontab(5)-manpage: http://unixhelp.ed.ac.uk/CGI/man-cgi?crontab+5
 crontab(8)-manpage: http://unixhelp.ed.ac.uk/CGI/man-cgi?crontab
+
+Irgendwas gegen Race-Conditions wäre auch gut: Job erst wieder anwerfen,
+wenn der alte terminiert. Sich da immer selbst seine Semaphoren zu basteln,
+ist mühselig.
 
 Newsgroups: de.comp.os.unix.misc
 From: "Peter J. Holzer" <hjp-usenet2@hjp.at>

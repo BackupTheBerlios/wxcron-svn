@@ -40,6 +40,21 @@ WXCConfig::WXCConfig ()
     {
         wxFile file(WXC_CONFIG, wxFile::write);
         WXCLog::Do(wxString::Format("Log-file %s doesn't exists! Create a default one...", WXC_CONFIG));
+
+        file.Write
+        (
+            wxString::Format
+            (
+                "# Maximum size of the log-file (%s) in KiloByte\n" \
+                "log-size=%d\n\n" \
+                "# Intervall in minutes to check crontab for modifications.\n" \
+                "# 0 = Check on only on startup of wxCron.\n" \
+                "crontab-check=%d\n",
+                WXC_CONFIG,
+                GetMaxLogFileSizeInKB(),
+                GetCheckCrontabIntervallInMinutes()
+            )
+        );
     }
 
     //
