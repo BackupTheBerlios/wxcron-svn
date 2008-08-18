@@ -51,6 +51,8 @@ WXCJob::WXCJob (const wxString& strOriginalLine, long lLine)
 
 void WXCJob::Start ()
 {
+    wxDateTime dtNextExec;
+
     // old timer there?
     if (pTimer_)
         pTimer_->Stop();
@@ -60,18 +62,42 @@ void WXCJob::Start ()
     // get last execution
     wxDateTime dt = WXCTimestampFile::Instance().GetLast(GetOriginalLine());
 
+    // there is a last execution timestamp
     if ( dt.IsValid() )
     {
-        // catch up the job
-        if ( time_.GetNext(dt) < wxDateTime::Now() )
+        // last execution in the past
+        if ( dt < wxDateTime::Now() )
         {
-            Execute();
-            return;
+            // catch up the job
+            if ( time_.GetNext(dt) < wxDateTime::Now() )
+            {
+                Execute();
+                return;
+            }
+            else
+            {
+                dtNextExec = time_.GetNext(dt);
+            }
+        }
+        else
+        // its in the future
+        {
+            dtNextExec = dt;
         }
     }
 
+    if ( !(dtNextExec.IsValid()) )
+        dtNextExec = time_.GetNext();
+
     // start the timer
-    pTimer_->Start(time_.GetNext());
+    pTimer_->Start(dtNextExec);
+
+    // remember timestamp for future execution
+    if ( !(dt.IsValid()) )
+    {
+        WXCTimestampFile::Instance().Set(GetOriginalLine(), dtNextExec);
+        WXCTimestampFile::Instance().Save();
+    }
 }
 
 

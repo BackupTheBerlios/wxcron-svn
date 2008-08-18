@@ -1,4 +1,22 @@
-- generate a default wxcron.conf with # comments
+- Job-Nachholen=JA|NEIN
+- Job-Alle-Nachholen-Queue=JA|NEIN
+
+> Was ist mit einem Job der noch nie ausgeführt wurde?
+> Nach der Beschreibung dürfte es für diesen keine letzte Ausführung
+> geben, also wird der nächste Ausführungszeitpunkt nie in der
+> Vergangenheit liegen. Verstehe ich das richtig?
+> Falls ja, würde folgender Job wohl niemals ausgeführt:
+> * Start für täglich 2:00 Uhr nachts konfiguriert
+> * Rechner wird täglich von 8:00 bis 19:00 Uhr betrieben und dazwischen
+> heruntergefahren.
+
+
+> Wunschkonzert? Cool ;-)
+> Eine Option "Nachholen oder nicht" wäre schon ganz praktisch (aber nicht
+> zwingend notwendig).
+> Würde aber vermutlich eine Abweichung der crontab vom gewohnten Format
+> bedeuten und damit bei vielen Usern Missfallen erregen
+
 
 - while execution change working dir to the command
 
