@@ -1,4 +1,4 @@
 #M    S   T M W    Befehl
 */30     *   * * *    C:\Programme\wxPTB -o D:\ptb.sig
 */30     *   * * *    D:\copy_ptb.bat
-13 17 * * * calc.exe
+#*/30 * * * * calc.exe

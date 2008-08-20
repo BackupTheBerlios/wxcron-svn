@@ -60,29 +60,37 @@ void WXCJob::Start ()
         pTimer_ = new WXCTimer(this);
 
     // get last execution
-    wxDateTime dt = WXCTimestampFile::Instance().GetLast(GetOriginalLine());
+    wxDateTime dtLastExec = WXCTimestampFile::Instance().GetLast(GetOriginalLine());
+    //WXCLog::Do(wxString::Format("wxDateTime dtLastExec = WXCTimestampFile::Instance().GetLast(GetOriginalLine());\ndtLastExec:%s", dtLastExec.Format()));
 
     // there is a last execution timestamp
-    if ( dt.IsValid() )
+    if ( dtLastExec.IsValid() )
     {
+        //WXCLog::Do("dtLastExec.IsValid()");
+
         // last execution in the past
-        if ( dt < wxDateTime::Now() )
+        if ( dtLastExec <= wxDateTime::Now() )
         {
             // catch up the job
-            if ( time_.GetNext(dt) < wxDateTime::Now() )
+            //WXCLog::Do(wxString::Format("time_.GetNext(dtLastExec) < wxDateTime::Now()\ntime_.GetNext(dtLastExec): %s, Now(): %s", time_.GetNext(dtLastExec).Format(), wxDateTime::Now().Format()));
+
+            if ( time_.GetNext(dtLastExec) < wxDateTime::Now() )
             {
+                //WXCLog::Do("Execute()");
                 Execute();
                 return;
             }
             else
             {
-                dtNextExec = time_.GetNext(dt);
+                dtNextExec = time_.GetNext(dtLastExec);
+                //WXCLog::Do(wxString::Format("dtNextExec = time_.GetNext(dtLastExec)\ndtNextExec: %s", dtNextExec.Format()));
             }
         }
         else
         // its in the future
         {
-            dtNextExec = dt;
+            dtNextExec = dtLastExec;
+            //WXCLog::Do(wxString::Format("dtNextExec = dtLastExec;\ndtLastExec: %s", dtLastExec.Format()));
         }
     }
 
@@ -90,10 +98,11 @@ void WXCJob::Start ()
         dtNextExec = time_.GetNext();
 
     // start the timer
+    //WXCLog::Do("Start(dtNextExec)");
     pTimer_->Start(dtNextExec);
 
     // remember timestamp for future execution
-    if ( !(dt.IsValid()) )
+    if ( !(dtLastExec.IsValid()) )
     {
         WXCTimestampFile::Instance().Set(GetOriginalLine(), dtNextExec);
         WXCTimestampFile::Instance().Save();
