@@ -1,0 +1,33 @@
+-------------------------------------------------------------------------------
+                             ==== CREDITS ====
+
+                               -- wxCron --
+                              Version 0.1.0
+-------------------------------------------------------------------------------
+
+Thanks to...
+
+- the wxCron community, users and testers
+
+- the wxWidget community and the maintainers
+  Cross-Platform GUI Library <http://www.wxwidgets.org>
+
+- the Code::Blocks community and the maintainers
+  The open source, cross platform C++ IDE <http://www.codeblocks.org>
+
+- the MinGW project
+  GNU based compiler system for Windows <http://www.mingw.org>
+
+- BerliOS
+  free service to Open Source developers <http://www.berlios.de>
+
+- Inkscape
+  Open Source vector graphics editor, using the W3C standard Scalable
+  Vector Graphics (SVG) file format. <http://www.inkscape.org>
+
+- de.comp.os.unix.misc
+  checking the rules of cron
+
+- persons created some stuff that is not in the release-version
+
+- all others I forgot (please mail me)

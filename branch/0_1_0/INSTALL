@@ -1,0 +1,41 @@
+-------------------------------------------------------------------------------
+                             ==== INSTALL ====
+
+                               -- wxCron --
+                              Version 0.1.0
+-------------------------------------------------------------------------------
+
+There is no need for a install routine. Just unpack all files to a directory
+and start the binary (wxCron.exe on windows).
+On first start wxCron will create a configuration file ("wxCron.conf"),
+a log file ("wxCron.log") and a timestamp file ("wxCron.tsmp"). That's all!
+
+Please feel free to contact me if you need more informations!
+
+FILE & DIRECTORY LISTING
+~~~~~~~~~~~~~~~~~~~~~~~~
+ README         - general instructions
+ INSTALL        - installation instructions (this file)
+ LICENSE        - license information
+ HISTORY        - history of wxCron development
+ CREDITS        - all persons, projects and institutions
+                  related to this project
+ CHANGELOG      - differences between the blackfisk versions
+ HELP			- help file for wxCron
+ wxCron.exe  	- the windows (32bit) binary
+ crontab        - the crontab file where you can define the jobs
+ wxCron.conf	- configuration file for wxCron
+ wxCron.tsmp	- timestamp file to remember the last job execution
+ graphic/       - icons and other graphic stuff for wxCron
+
+ -- (extra files and directories in the source package) --
+ include/       - wxCron header files
+ src/           - wxCron source files
+ graphic/src    - SVG source files for graphic stuff
+ BUILD          - informations how to build wxCron
+ TODO           - This is just a little TODO list for wxCron.
+                  Please use the bugtracking-system on BerliOS instead
+                  of this file.
+ wxCron.workspace - workspace file for the IDE Code::Blocks
+ wxCron.cbp  	- project file for the IDE Code::Blocks
+ wxCron.rc		- resource file for wxCron
