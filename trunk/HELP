@@ -2,7 +2,7 @@
                              ==== HELP ====
 
                                -- wxCron --
-                              Version 0.0.1
+                              Version 0.1.0
 -------------------------------------------------------------------------------
 
 (This help file based on man crontab(5).)
@@ -49,5 +49,12 @@ For example, '30 4 1,15 * 5' would cause a command to be run at 4:30 on the
 1st and 15th of each month or every friday.
 If only one of the two day fields is restricted the other one (with '*') is
 ignored.
+
+Optional it is possible to define options before the first field. Each option
+start with '@' and is sepearated by a blank ' '.
+Available options:
+
+  @nocatchup   If the machine wasn't on power at the specified time, the job
+               won't catched up.
 
 Please feel free to contact me if you need more help!

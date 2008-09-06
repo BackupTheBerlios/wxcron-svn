@@ -2,13 +2,13 @@
                              ==== INSTALL ====
 
                                -- wxCron --
-                              Version 0.0.1
+                              Version 0.1.0
 -------------------------------------------------------------------------------
 
 There is no need for a install routine. Just unpack all files to a directory
 and start the binary (wxCron.exe on windows).
-On first start wxCron will create a configuration file a log file "wxCron.log"
-and a timestamp file "wxCron.tsmp". That's all!
+On first start wxCron will create a configuration file ("wxCron.conf"),
+a log file ("wxCron.log") and a timestamp file ("wxCron.tsmp"). That's all!
 
 Please feel free to contact me if you need more informations!
 
@@ -23,6 +23,7 @@ FILE & DIRECTORY LISTING
  CHANGELOG      - differences between the blackfisk versions
  HELP			- help file for wxCron
  wxCron.exe  	- the windows (32bit) binary
+ crontab        - the crontab file where you can define the jobs
  wxCron.conf	- configuration file for wxCron
  wxCron.tsmp	- timestamp file to remember the last job execution
  graphic/       - icons and other graphic stuff for wxCron

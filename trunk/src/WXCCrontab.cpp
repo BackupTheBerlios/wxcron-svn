@@ -82,7 +82,18 @@ WXCCrontab::WXCCrontab ()
             // check for enough parameters
             if ( regex.Matches(strLine) )
             {
-                Instance().vecJobs_.push_back(WXCJob(strLine, lLine));
+                wxArrayString arrOptions;
+                wxString strOpt;
+
+                // check for options
+                while ( strLine.StartsWith("@") )
+                {
+                    strOpt = strLine.BeforeFirst(' ');
+                    strLine = strLine.AfterFirst(' ');
+                    arrOptions.Add(strOpt);
+                }
+
+                Instance().vecJobs_.push_back(WXCJob(strLine, lLine, arrOptions));
             }
             else
             {

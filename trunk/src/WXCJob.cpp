@@ -30,15 +30,22 @@
 #include "WXCTimestampFile.h"
 
 
-WXCJob::WXCJob (const wxString& strOriginalLine, long lLine)
+WXCJob::WXCJob (const wxString& strOriginalLine,
+                long lLine,
+                const wxArrayString& arrOptions)
       : lLine_(lLine),
         pTimer_(NULL),
         strOriginalLine_(strOriginalLine),
-        time_(strOriginalLine)
+        time_(strOriginalLine),
+        bOption_nocatchup_(false)
 {
+    // the command
     strCommand_ = time_.GetUnparsed();
     strCommand_.Trim(true);
     strCommand_.Trim(false);
+
+    // options
+    SetOptions(arrOptions);
 }
 
 
@@ -47,7 +54,6 @@ WXCJob::WXCJob (const wxString& strOriginalLine, long lLine)
     if (pTimer_)
         delete pTimer_;
 }
-
 
 void WXCJob::Start ()
 {
@@ -61,36 +67,36 @@ void WXCJob::Start ()
 
     // get last execution
     wxDateTime dtLastExec = WXCTimestampFile::Instance().GetLast(GetOriginalLine());
-    //WXCLog::Do(wxString::Format("wxDateTime dtLastExec = WXCTimestampFile::Instance().GetLast(GetOriginalLine());\ndtLastExec:%s", dtLastExec.Format()));
 
     // there is a last execution timestamp
     if ( dtLastExec.IsValid() )
     {
-        //WXCLog::Do("dtLastExec.IsValid()");
-
         // last execution in the past
         if ( dtLastExec <= wxDateTime::Now() )
         {
-            // catch up the job
-            //WXCLog::Do(wxString::Format("time_.GetNext(dtLastExec) < wxDateTime::Now()\ntime_.GetNext(dtLastExec): %s, Now(): %s", time_.GetNext(dtLastExec).Format(), wxDateTime::Now().Format()));
-
-            if ( time_.GetNext(dtLastExec) < wxDateTime::Now() )
+            // catchup ?
+            if ( !bOption_nocatchup_ )
             {
-                //WXCLog::Do("Execute()");
-                Execute();
-                return;
+                // catch up the job
+                if ( time_.GetNext(dtLastExec) < wxDateTime::Now() )
+                {
+                    Execute();
+                    return;
+                }
+                else
+                {
+                    dtNextExec = time_.GetNext(dtLastExec);
+                }
             }
             else
             {
-                dtNextExec = time_.GetNext(dtLastExec);
-                //WXCLog::Do(wxString::Format("dtNextExec = time_.GetNext(dtLastExec)\ndtNextExec: %s", dtNextExec.Format()));
+                dtNextExec = time_.GetNext();
             }
         }
         else
         // its in the future
         {
             dtNextExec = dtLastExec;
-            //WXCLog::Do(wxString::Format("dtNextExec = dtLastExec;\ndtLastExec: %s", dtLastExec.Format()));
         }
     }
 
@@ -98,7 +104,6 @@ void WXCJob::Start ()
         dtNextExec = time_.GetNext();
 
     // start the timer
-    //WXCLog::Do("Start(dtNextExec)");
     pTimer_->Start(dtNextExec);
 
     // remember timestamp for future execution
@@ -137,4 +142,23 @@ const wxString& WXCJob::GetOriginalLine ()
 long WXCJob::GetLine ()
 {
     return lLine_;
+}
+
+void WXCJob::SetOptions(const wxArrayString& arrOptions)
+{
+    for ( size_t i = 0; i < arrOptions.GetCount(); ++i )
+    {
+        if  ( arrOptions[i] == "@nocatchup" )
+        {
+            bOption_nocatchup_ = true;
+            break;
+        }
+        else
+        {
+            WXCLog::Do(wxString::Format("ERROR: Unknown option \"%s\" in crontab-line: %d)",
+                                        arrOptions[i],
+                                        GetLine()));
+            break;
+        }
+    }
 }

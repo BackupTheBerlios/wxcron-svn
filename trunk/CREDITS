@@ -2,10 +2,12 @@
                              ==== CREDITS ====
 
                                -- wxCron --
-                              Version 0.0.1
+                              Version 0.1.0
 -------------------------------------------------------------------------------
 
 Thanks to...
+
+- the wxCron community, users and testers
 
 - the wxWidget community and the maintainers
   Cross-Platform GUI Library <http://www.wxwidgets.org>

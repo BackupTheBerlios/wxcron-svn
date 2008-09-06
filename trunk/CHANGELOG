@@ -2,8 +2,13 @@
                              ==== CHANGELOG ====
 
                                -- wxCron --
-							   Version 0.0.1
+							   Version 0.1.0
 -------------------------------------------------------------------------------
 
-<<< 0.0.1 >>>
+<<< 0.1.0 >>>
+- generate a default wxcron.conf with # comments
+- BUGFIX: modifing crontab file while wxCron run work correct now
+- FEAUTER: now it can handle (catch up) never reached timestamps, too (@nocatchup)
 
+<<< 0.0.1 >>>
+first release

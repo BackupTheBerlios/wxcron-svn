@@ -48,9 +48,17 @@ class WXCJob
         /// the command to execute
         wxString                strCommand_;
 
+        /// option "@nocatchup"
+        bool                    bOption_nocatchup_;
+
+        ///
+        void SetOptions(const wxArrayString& arrOptions);
+
     public:
         /// ctor
-        WXCJob (const wxString& strOriginalLine, long lLine);
+        WXCJob (const wxString& strOriginalLine,
+                long lLine,
+                const wxArrayString& arrOptions);
 
         /// virtual dtor
         virtual ~WXCJob ();
