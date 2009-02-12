@@ -1,0 +1,49 @@
+-------------------------------------------------------------------------------
+                             ==== README ====
+
+                               -- wxCron --
+                              Version 0.1.1
+-------------------------------------------------------------------------------
+
+DESCRIPTION
+~~~~~~~~~~~
+WxCron is a cron-like job scheduler.
+It is a clone of the good old cron (aka Vixie Cron) and anacron and is full
+plattform independent.
+
+LICENSE
+~~~~~~~
+wxCron is licensed under the GNU General Public License Version 3.
+Please see the file LICENSE for more details.
+
+INSTALLATION
+~~~~~~~~~~~~
+Please see the file INSTALL for more details.
+
+FILE & DIRECTORY LISTING
+~~~~~~~~~~~~~~~~~~~~~~~~
+Please see the file INSTALL for a detailed listing.
+
+CONTACT & HELP & SUPPORT
+~~~~~~~~~~~~~~~~~~~~~~~~
+Feel free to contact the project people and the community over this forums!
+
+	- wxCron-general
+	  Everything related to wxCron! Support, Help, Questions, Development, etc
+
+The forums can be used/accessed as newsgroup, mailinglist, newsfeed or
+web-forum. Please look on <http://wxcron.berlios.de> for more detailes.
+The last possibility is to send e-mail to blackfisk@web.de.
+
+DEVELOPMENT
+~~~~~~~~~~~
+Everyone is welcome to the project team! There is no need to be a software
+developer because there are a lot of other usefull things that can be done!
+The project need users they improve wxCron with submiting feauter requests,
+reporting bugs and telling everything that is usefull to wxCron.
+Please see the project website <http://www.wxcron.berlios.de> for more
+detailes and feel free to contact the project.
+
+Please see the file BUILD to see how to build blackfisk.
+Please see the project website <http://wxcron.berlios.de> for detailes about
+bug reports, feauter request, SVN access, source packages and things like that.

@@ -1,0 +1,18 @@
+-------------------------------------------------------------------------------
+                             ==== CHANGELOG ====
+
+                               -- wxCron --
+							   Version 0.1.1
+-------------------------------------------------------------------------------
+
+<<< 0.1.1 >>>
+- BUGFIX: correct saving and parsing of timestamps
+- redesign of the logo with gimp
+
+<<< 0.1.0 >>>
+- generate a default wxcron.conf with # comments
+- BUGFIX: modifing crontab file while wxCron run work correct now
+- FEAUTER: now it can handle (catch up) never reached timestamps, too (@nocatchup)
+
+<<< 0.0.1 >>>
+first release
