@@ -88,4 +88,3 @@ void WXCTaskBarIcon::OnClick(wxTaskBarIconEvent& rEvent)
 {
     PopupMenu(CreatePopupMenu());
 }
-

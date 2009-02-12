@@ -2,7 +2,7 @@
                              ==== CREDITS ====
 
                                -- wxCron --
-                              Version 0.1.0
+                              Version 0.1.1
 -------------------------------------------------------------------------------
 
 Thanks to...
@@ -20,6 +20,12 @@ Thanks to...
 
 - BerliOS
   free service to Open Source developers <http://www.berlios.de>
+
+- GIMP
+  GIMP is the GNU Image Manipulation Program. It is a freely
+  distributed piece of software for such tasks as photo retouching,
+  image composition and image authoring. It works on many operating
+  systems, in many languages. <http://www.gimp.org>
 
 - Inkscape
   Open Source vector graphics editor, using the W3C standard Scalable

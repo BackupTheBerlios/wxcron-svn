@@ -67,8 +67,8 @@ class WXCCrontab
             last read and read it again if needed. */
         static void CheckModification ();
 
-        void XXX (const wxString& str, short iFrom, short iTo);
-        void YYY (const wxString& str);
+        /*void XXX (const wxString& str, short iFrom, short iTo);
+        void YYY (const wxString& str);*/
 };
 
 #endif    // WXCCRONTAB_H

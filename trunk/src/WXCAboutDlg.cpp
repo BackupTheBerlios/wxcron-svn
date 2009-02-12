@@ -114,7 +114,11 @@ WXCAboutDlg::WXCAboutDlg ()
                                              "MinGW",
                                              "",
                                              _(" GNU based compiler system for Windows"));
-    wxSizer* pTools3 = CreateThirdPartySizer("http://www.inkscape.org",
+    wxSizer* pTools3 = CreateThirdPartySizer("http://www.gimp.org",
+                                             "GIMP",
+                                             "",
+                                             _(" GNU Image Manipulation Program"));
+    wxSizer* pTools4 = CreateThirdPartySizer("http://www.inkscape.org",
                                              "Inkscape",
                                              "",
                                              _(" open source vector graphics editor"));
@@ -145,6 +149,7 @@ WXCAboutDlg::WXCAboutDlg ()
     pMLeftSizer->Add(pTools1, wxSizerFlags(0).Border(wxBOTTOM, 3));
     pMLeftSizer->Add(pTools2, wxSizerFlags(0).Border(wxBOTTOM, 3));
     pMLeftSizer->Add(pTools3, wxSizerFlags(0).Border(wxBOTTOM, 3));
+    pMLeftSizer->Add(pTools4, wxSizerFlags(0).Border(wxBOTTOM, 3));
     pMRightSizer->Add(pSupporters, wxSizerFlags(0).Center());
     pMRightSizer->Add(pSupporters1, wxSizerFlags(0).Border(wxBOTTOM, 3));
     pMRightSizer->Add(pSupporters2, wxSizerFlags(0).Border(wxBOTTOM, 3));

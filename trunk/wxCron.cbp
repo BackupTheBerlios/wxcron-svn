@@ -32,16 +32,19 @@
 				<Option compiler="gcc" />
 				<Option projectResourceIncludeDirsRelation="1" />
 				<Linker>
-					<Add library="libwxmsw$(#wxversion)u.a" />
+					<Add library="libwxmsw$(#wxversion)u_adv.a" />
+					<Add library="libwxmsw$(#wxversion)u_core.a" />
+					<Add library="libwxbase$(#wxversion)u_net.a" />
+					<Add library="libwxbase$(#wxversion)u.a" />
+					<Add library="libwxregexu.a" />
 					<Add library="libwxpng.a" />
+					<Add library="libwxzlib.a" />
 					<Add library="comctl32" />
 					<Add library="ole32" />
 					<Add library="oleaut32" />
 					<Add library="uuid" />
 					<Add library="winmm" />
-					<Add library="libwxregexu.a" />
 					<Add library="wsock32" />
-					<Add library="libwxzlib.a" />
 					<Add directory="$(#wx)\lib\gcc_lib" />
 				</Linker>
 			</Target>

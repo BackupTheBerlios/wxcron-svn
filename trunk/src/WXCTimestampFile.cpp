@@ -118,7 +118,7 @@ bool WXCTimestampFile::Read ()
          !file.Eof();
          strLine = file.GetNextLine())
     {
-        dt.ParseDateTime(strLine);
+        dt.ParseISOCombined(strLine);
         strLine = file.GetNextLine();
 
         // check for unused timestamps
@@ -147,7 +147,7 @@ bool WXCTimestampFile::Save ()
          ++it)
     {
         // add timestamp and crontab line
-        file.Write(wxString::Format("%s\n%s\n", (*it).first.Format(), (*it).second));
+        file.Write(wxString::Format("%s\n%s\n", (*it).first.FormatISOCombined(), (*it).second));
     }
 
     // close the temporary file and replace WXC_TIMESTAMP with it

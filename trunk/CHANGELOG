@@ -2,8 +2,12 @@
                              ==== CHANGELOG ====
 
                                -- wxCron --
-							   Version 0.1.0
+							   Version 0.1.1
 -------------------------------------------------------------------------------
+
+<<< 0.1.1 >>>
+- BUGFIX: correct saving and parsing of timestamps
+- redesign of the logo with gimp
 
 <<< 0.1.0 >>>
 - generate a default wxcron.conf with # comments
