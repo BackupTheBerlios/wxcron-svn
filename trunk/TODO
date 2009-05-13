@@ -1,5 +1,6 @@
 
 - add "show log" in context menu
+- add "restart/read crontab" in context menu
 - prepare for 0.2.0 release
 
 - Job-Alle-Nachholen-Queue=JA|NEIN
