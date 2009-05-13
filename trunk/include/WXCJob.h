@@ -50,6 +50,8 @@ class WXCJob
 
         /// option "@nocatchup"
         bool                    bOption_nocatchup_;
+        /// option "@hide"
+        bool                    bOption_hide_;
 
         ///
         void SetOptions(const wxArrayString& arrOptions);

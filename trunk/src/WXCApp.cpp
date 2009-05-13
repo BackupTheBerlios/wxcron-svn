@@ -67,6 +67,9 @@ WXCApp::WXCApp ()
 
 /*virtual*/ bool WXCApp::OnInit()
 {
+    // create systray icon
+    pTaskBarIcon_ = new WXCTaskBarIcon();
+
     // log start
     WXCLog::Do(wxEmptyString, false);
     WXCLog::Do(wxString::Format("%s started...", GetFullApplicationName()));
@@ -110,9 +113,6 @@ WXCApp::WXCApp ()
         pTimer->Start(1000 * 60 * WXCConfig::Instance().GetCheckCrontabIntervallInMinutes(),
                       wxTIMER_CONTINUOUS);
     }
-
-    // create systray icon
-    pTaskBarIcon_ = new WXCTaskBarIcon();
 
     return true;
 }

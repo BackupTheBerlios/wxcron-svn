@@ -25,9 +25,9 @@
 
 #define WXC_APP_NAME                "wxCron"
 #define WXC_VERSION_MAJOR           0
-#define WXC_VERSION_MINOR           1
-#define WXC_VERSION_RELEASE         1
-#define WXC_VERSION_EXTENSION       ""
+#define WXC_VERSION_MINOR           2
+#define WXC_VERSION_RELEASE         0
+#define WXC_VERSION_EXTENSION       "alpha"
 #define WXC_AUTHOR                  "Christian Buhtz"
 
 #define WXC_CRONTAB                 "crontab"

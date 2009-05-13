@@ -54,7 +54,9 @@ Optional it is possible to define options before the first field. Each option
 start with '@' and is sepearated by a blank ' '.
 Available options:
 
-  @nocatchup   If the machine wasn't on power at the specified time, the job
-               won't catched up.
+    @nocatchup  If the machine wasn't on power at the specified time, the job
+                won't catched up.
+    @hide       Don't show the window of the job on desktop or in the taskbar.
+
 
 Please feel free to contact me if you need more help!

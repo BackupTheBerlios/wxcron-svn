@@ -8,7 +8,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug Dynamic">
-				<Option output=".\wxCronDd.exe" prefix_auto="0" extension_auto="0" />
+				<Option output="..\wxCronDd.exe" prefix_auto="0" extension_auto="0" />
 				<Option object_output=".out\objs_debd" />
 				<Option type="0" />
 				<Option compiler="gcc" />
@@ -26,7 +26,7 @@
 				</Linker>
 			</Target>
 			<Target title="Release Static">
-				<Option output=".\wxCronRs.exe" prefix_auto="0" extension_auto="0" />
+				<Option output="..\wxCronRs.exe" prefix_auto="0" extension_auto="0" />
 				<Option object_output=".out\objs_rels" />
 				<Option type="0" />
 				<Option compiler="gcc" />
@@ -55,49 +55,49 @@
 		<Compiler>
 			<Add directory="$(#wx)\include" />
 			<Add directory="$(#wx)\contrib\include" />
-			<Add directory="include" />
+			<Add directory="..\include" />
 		</Compiler>
-		<Unit filename="BUILD" />
-		<Unit filename="CHANGELOG" />
-		<Unit filename="CREDITS" />
-		<Unit filename="HELP" />
-		<Unit filename="HISTORY" />
-		<Unit filename="INSTALL" />
-		<Unit filename="LICENSE" />
+		<Unit filename="..\CHANGELOG" />
+		<Unit filename="..\CREDITS" />
+		<Unit filename="..\HELP" />
+		<Unit filename="..\HISTORY" />
+		<Unit filename="..\INSTALL" />
+		<Unit filename="..\LICENSE" />
+		<Unit filename="..\README" />
+		<Unit filename="..\TODO" />
 		<Unit filename="README" />
-		<Unit filename="TODO" />
-		<Unit filename="crontab" />
-		<Unit filename="include\WXCAboutDlg.h" />
-		<Unit filename="include\WXCApp.h" />
-		<Unit filename="include\WXCConfig.h" />
-		<Unit filename="include\WXCConfigDlg.h" />
-		<Unit filename="include\WXCCrontab.h" />
-		<Unit filename="include\WXCHyperlinkCtrl.h" />
-		<Unit filename="include\WXCJob.h" />
-		<Unit filename="include\WXCLog.h" />
-		<Unit filename="include\WXCTaskBarIcon.h" />
-		<Unit filename="include\WXCTime.h" />
-		<Unit filename="include\WXCTimeValue.h" />
-		<Unit filename="include\WXCTimer.h" />
-		<Unit filename="include\WXCTimestampFile.h" />
-		<Unit filename="include\wxCron.h" />
-		<Unit filename="src\WXCAboutDlg.cpp" />
-		<Unit filename="src\WXCApp.cpp" />
-		<Unit filename="src\WXCConfig.cpp" />
-		<Unit filename="src\WXCConfigDlg.cpp" />
-		<Unit filename="src\WXCCrontab.cpp" />
-		<Unit filename="src\WXCHyperlinkCtrl.cpp" />
-		<Unit filename="src\WXCJob.cpp" />
-		<Unit filename="src\WXCLog.cpp" />
-		<Unit filename="src\WXCTaskBarIcon.cpp" />
-		<Unit filename="src\WXCTime.cpp" />
-		<Unit filename="src\WXCTimeValue.cpp" />
-		<Unit filename="src\WXCTimer.cpp" />
-		<Unit filename="src\WXCTimestampFile.cpp" />
-		<Unit filename="wxCron.log" />
-		<Unit filename="wxCron.rc">
+		<Unit filename="..\crontab" />
+		<Unit filename="..\include\WXCAboutDlg.h" />
+		<Unit filename="..\include\WXCApp.h" />
+		<Unit filename="..\include\WXCConfig.h" />
+		<Unit filename="..\include\WXCConfigDlg.h" />
+		<Unit filename="..\include\WXCCrontab.h" />
+		<Unit filename="..\include\WXCHyperlinkCtrl.h" />
+		<Unit filename="..\include\WXCJob.h" />
+		<Unit filename="..\include\WXCLog.h" />
+		<Unit filename="..\include\WXCTaskBarIcon.h" />
+		<Unit filename="..\include\WXCTime.h" />
+		<Unit filename="..\include\WXCTimeValue.h" />
+		<Unit filename="..\include\WXCTimer.h" />
+		<Unit filename="..\include\WXCTimestampFile.h" />
+		<Unit filename="..\include\wxCron.h" />
+		<Unit filename="..\include\wxCron.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
+		<Unit filename="..\src\WXCAboutDlg.cpp" />
+		<Unit filename="..\src\WXCApp.cpp" />
+		<Unit filename="..\src\WXCConfig.cpp" />
+		<Unit filename="..\src\WXCConfigDlg.cpp" />
+		<Unit filename="..\src\WXCCrontab.cpp" />
+		<Unit filename="..\src\WXCHyperlinkCtrl.cpp" />
+		<Unit filename="..\src\WXCJob.cpp" />
+		<Unit filename="..\src\WXCLog.cpp" />
+		<Unit filename="..\src\WXCTaskBarIcon.cpp" />
+		<Unit filename="..\src\WXCTime.cpp" />
+		<Unit filename="..\src\WXCTimeValue.cpp" />
+		<Unit filename="..\src\WXCTimer.cpp" />
+		<Unit filename="..\src\WXCTimestampFile.cpp" />
+		<Unit filename="..\wxCron.log" />
 		<Extensions>
 			<code_completion />
 			<envvars />

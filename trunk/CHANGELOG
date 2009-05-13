@@ -5,6 +5,10 @@
 							   Version 0.1.1
 -------------------------------------------------------------------------------
 
+<<< 0.2.0 >>>
+- @hide as a option for jobs
+- some bugfixes
+
 <<< 0.1.1 >>>
 - BUGFIX: correct saving and parsing of timestamps
 - redesign of the logo with gimp

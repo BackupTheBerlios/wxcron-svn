@@ -37,7 +37,8 @@ WXCJob::WXCJob (const wxString& strOriginalLine,
         pTimer_(NULL),
         strOriginalLine_(strOriginalLine),
         time_(strOriginalLine),
-        bOption_nocatchup_(false)
+        bOption_nocatchup_(false),
+        bOption_hide_(false)
 {
     // the command
     strCommand_ = time_.GetUnparsed();
@@ -127,7 +128,15 @@ void WXCJob::Execute ()
     WXCTimestampFile::Instance().Save();
 
     // execute
-    wxExecute(strCommand_, wxEXEC_ASYNC);
+    if ( bOption_hide_ )
+    {
+            wxArrayString arrOut, arrErr;
+            wxExecute(strCommand_, arrOut, arrErr, wxEXEC_ASYNC);
+    }
+    else
+    {
+        wxExecute(strCommand_, wxEXEC_ASYNC);
+    }
 
     // restart job
     Start();
@@ -151,14 +160,16 @@ void WXCJob::SetOptions(const wxArrayString& arrOptions)
         if  ( arrOptions[i] == "@nocatchup" )
         {
             bOption_nocatchup_ = true;
-            break;
+        }
+        else if ( arrOptions[i] == "@hide" )
+        {
+            bOption_hide_ = true;
         }
         else
         {
             WXCLog::Do(wxString::Format("ERROR: Unknown option \"%s\" in crontab-line: %d)",
                                         arrOptions[i],
                                         GetLine()));
-            break;
         }
     }
 }
