@@ -67,9 +67,6 @@ WXCApp::WXCApp ()
 
 /*virtual*/ bool WXCApp::OnInit()
 {
-    // create systray icon
-    pTaskBarIcon_ = new WXCTaskBarIcon();
-
     // log start
     WXCLog::Do(wxEmptyString, false);
     WXCLog::Do(wxString::Format("%s started...", GetFullApplicationName()));
@@ -85,6 +82,9 @@ WXCApp::WXCApp ()
         WXCLog::Do(strErr);
         return false;
     }
+
+	// create systray icon
+    pTaskBarIcon_ = new WXCTaskBarIcon();
 
     // read the crontab file
     if ( !(WXCCrontab::Read()) )

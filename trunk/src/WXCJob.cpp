@@ -131,17 +131,13 @@ void WXCJob::Execute ()
     // execute
     if ( bOption_hide_ )
     {
-		WXCLog::Do("BEFORE wxExecute(@hide)");
 		wxProcess* pProcess = new wxProcess(wxPROCESS_REDIRECT);
 		wxExecute(strCommand_, wxEXEC_ASYNC, pProcess);
 		pProcess->Detach();
-		WXCLog::Do("AFTER wxExecute(@hide)");
     }
     else
     {
-		WXCLog::Do("BEFORE wxExecute()");
         wxExecute(strCommand_, wxEXEC_ASYNC);
-		WXCLog::Do("AFTER wxExecute()");
     }
 
     // restart job

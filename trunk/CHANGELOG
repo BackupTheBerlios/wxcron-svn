@@ -2,12 +2,15 @@
                              ==== CHANGELOG ====
 
                                -- wxCron --
-							   Version 0.1.1
+							   Version 0.2.0
 -------------------------------------------------------------------------------
 
 <<< 0.2.0 >>>
 - @hide as a option for jobs
-- some bugfixes
+- "Show log"
+- "Edit crontab"
+- "check crontab"
+- BUGFIX: freezing wxCron with hidden jobs
 
 <<< 0.1.1 >>>
 - BUGFIX: correct saving and parsing of timestamps

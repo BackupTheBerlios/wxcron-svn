@@ -2,7 +2,7 @@
                              ==== CREDITS ====
 
                                -- wxCron --
-                              Version 0.1.1
+                              Version 0.2.0
 -------------------------------------------------------------------------------
 
 Thanks to...
@@ -26,6 +26,15 @@ Thanks to...
   distributed piece of software for such tasks as photo retouching,
   image composition and image authoring. It works on many operating
   systems, in many languages. <http://www.gimp.org>
+
+- Jan Kechel - The maintainer of <http://publictimestamp.org>
+
+- 7-Zip
+  It is a file archiver with a high compression ratio.
+  <http://www.7-zip.org/>
+
+- IcoFX
+  Icon editor. <http://icofx.ro>
 
 - Inkscape
   Open Source vector graphics editor, using the W3C standard Scalable

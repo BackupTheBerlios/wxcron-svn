@@ -28,18 +28,27 @@
 #include "WXCApp.h"
 #include "WXCConfigDlg.h"
 #include "WXCAboutDlg.h"
+#include "WXCLogViewDlg.h"
+#include "WXCCrontabEditDlg.h"
+#include "WXCCrontab.h"
 #include "wxCron.h"
 
-#define WXC_TASKBARICON_ID_CLOSE        1 + wxID_HIGHEST
-#define WXC_TASKBARICON_ID_ABOUT        2 + wxID_HIGHEST
-#define WXC_TASKBARICON_ID_SETTINGS     3 + wxID_HIGHEST
+#define WXC_TASKBARICON_ID_CLOSE			1 + wxID_HIGHEST
+#define WXC_TASKBARICON_ID_ABOUT			2 + wxID_HIGHEST
+#define WXC_TASKBARICON_ID_SETTINGS			3 + wxID_HIGHEST
+#define WXC_TASKBARICON_ID_LOG				4 + wxID_HIGHEST
+#define WXC_TASKBARICON_ID_CHECKCRONTAB		5 + wxID_HIGHEST
+#define WXC_TASKBARICON_ID_EDITCRONTAB		6 + wxID_HIGHEST
 
 BEGIN_EVENT_TABLE(WXCTaskBarIcon, wxTaskBarIcon)
-    EVT_MENU                (WXC_TASKBARICON_ID_CLOSE,      WXCTaskBarIcon::OnMenuClose)
-    EVT_MENU                (WXC_TASKBARICON_ID_ABOUT,      WXCTaskBarIcon::OnMenuAbout)
-    EVT_MENU                (WXC_TASKBARICON_ID_SETTINGS,   WXCTaskBarIcon::OnMenuSettings)
-    EVT_TASKBAR_RIGHT_DOWN  (                               WXCTaskBarIcon::OnClick)
-    EVT_TASKBAR_LEFT_DOWN   (                               WXCTaskBarIcon::OnClick)
+    EVT_MENU                (WXC_TASKBARICON_ID_CLOSE,			WXCTaskBarIcon::OnMenuClose)
+    EVT_MENU                (WXC_TASKBARICON_ID_ABOUT,			WXCTaskBarIcon::OnMenuAbout)
+    EVT_MENU                (WXC_TASKBARICON_ID_SETTINGS,		WXCTaskBarIcon::OnMenuSettings)
+	EVT_MENU				(WXC_TASKBARICON_ID_LOG,			WXCTaskBarIcon::OnMenuShowLog)
+	EVT_MENU				(WXC_TASKBARICON_ID_CHECKCRONTAB,	WXCTaskBarIcon::OnMenuCheckCrontab)
+	EVT_MENU				(WXC_TASKBARICON_ID_EDITCRONTAB,	WXCTaskBarIcon::OnMenuEditCrontab)
+    EVT_TASKBAR_RIGHT_DOWN  (									WXCTaskBarIcon::OnClick)
+    EVT_TASKBAR_LEFT_DOWN   (									WXCTaskBarIcon::OnClick)
 END_EVENT_TABLE()
 
 WXCTaskBarIcon::WXCTaskBarIcon ()
@@ -61,10 +70,14 @@ WXCTaskBarIcon::WXCTaskBarIcon ()
 {
     wxMenu* pMenu = new wxMenu();
 
-    pMenu->Append(WXC_TASKBARICON_ID_SETTINGS, _("Settings"));
-    pMenu->Append(WXC_TASKBARICON_ID_ABOUT, _("About"));
+    pMenu->Append(WXC_TASKBARICON_ID_SETTINGS,		_("Settings"));
+	pMenu->Append(WXC_TASKBARICON_ID_LOG,			_("Show Log"));
+    pMenu->Append(WXC_TASKBARICON_ID_ABOUT,			_("About"));
+	pMenu->AppendSeparator();
+	pMenu->Append(WXC_TASKBARICON_ID_CHECKCRONTAB,	_("Check crontab"));
+	pMenu->Append(WXC_TASKBARICON_ID_EDITCRONTAB,	_("Edit crontab"));
     pMenu->AppendSeparator();
-    pMenu->Append(WXC_TASKBARICON_ID_CLOSE, _("Close"));
+    pMenu->Append(WXC_TASKBARICON_ID_CLOSE,			_("Close"));
 
     return pMenu;
 }
@@ -82,6 +95,23 @@ void WXCTaskBarIcon::OnMenuAbout (wxCommandEvent& rEvent)
 void WXCTaskBarIcon::OnMenuSettings (wxCommandEvent& rEvent)
 {
     new WXCConfigDlg();
+}
+
+
+void WXCTaskBarIcon::OnMenuShowLog (wxCommandEvent& rEvent)
+{
+	new WXCLogViewDlg();
+}
+
+void WXCTaskBarIcon::OnMenuCheckCrontab (wxCommandEvent& rEvent)
+{
+	WXCCrontab::CheckModification();
+}
+
+
+void WXCTaskBarIcon::OnMenuEditCrontab (wxCommandEvent& rEvent)
+{
+	new WXCCrontabEditDlg();
 }
 
 void WXCTaskBarIcon::OnClick(wxTaskBarIconEvent& rEvent)

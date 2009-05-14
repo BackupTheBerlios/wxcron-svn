@@ -93,8 +93,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				Description="Delete &quot;..\$(TargetName).ilk&quot;."
-				CommandLine="del &quot;..\$(TargetName).ilk&quot;"
+				Description=""
+				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
@@ -207,6 +207,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\include\WXCCrontabEditDlg.h"
+				>
+			</File>
+			<File
 				RelativePath="..\include\WXCHyperlinkCtrl.h"
 				>
 			</File>
@@ -219,7 +223,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\include\WXCLogViewDlg.h"
+				>
+			</File>
+			<File
 				RelativePath="..\include\wxCron.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\wxCron.rc"
 				>
 			</File>
 			<File
@@ -267,6 +279,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\src\WXCCrontabEditDlg.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\src\WXCHyperlinkCtrl.cpp"
 				>
 			</File>
@@ -276,6 +292,10 @@
 			</File>
 			<File
 				RelativePath="..\src\WXCLog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\src\WXCLogViewDlg.cpp"
 				>
 			</File>
 			<File
@@ -299,8 +319,52 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="Doc"
+			>
+			<File
+				RelativePath="..\CHANGELOG"
+				>
+			</File>
+			<File
+				RelativePath="..\CREDITS"
+				>
+			</File>
+			<File
+				RelativePath="..\HELP"
+				>
+			</File>
+			<File
+				RelativePath="..\HISTORY"
+				>
+			</File>
+			<File
+				RelativePath="..\INSTALL"
+				>
+			</File>
+			<File
+				RelativePath="..\LICENSE"
+				>
+			</File>
+			<File
+				RelativePath="..\README"
+				>
+			</File>
+			<File
+				RelativePath=".\README"
+				>
+			</File>
+			<File
+				RelativePath="..\TODO"
+				>
+			</File>
+		</Filter>
 		<File
-			RelativePath="..\include\wxCron.rc"
+			RelativePath="..\crontab"
+			>
+		</File>
+		<File
+			RelativePath="..\wxCron.log"
 			>
 		</File>
 	</Files>

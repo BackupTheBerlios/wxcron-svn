@@ -54,6 +54,12 @@ class WXCTaskBarIcon : public wxTaskBarIcon
         void OnMenuAbout (wxCommandEvent& rEvent);
         ///
         void OnMenuSettings (wxCommandEvent& rEvent);
+		///
+		void OnMenuShowLog (wxCommandEvent& rEvent);
+		///
+		void OnMenuCheckCrontab (wxCommandEvent& rEvent);
+		///
+		void OnMenuEditCrontab (wxCommandEvent& rEvent);
 
         DECLARE_EVENT_TABLE();
 };

@@ -1,8 +1,8 @@
 
-- add "show log" in context menu
-- add "restart/read crontab" in context menu
+
 - prepare for 0.2.0 release
 
+- more ergonomic edit-crontab-dialog
 - Job-Alle-Nachholen-Queue=JA|NEIN
 
 > Was ist mit einem Job der noch nie ausgeführt wurde?
@@ -24,9 +24,6 @@
 
 - while execution change working dir to the command
 
-- add publictimestamp.org to credits
-- add 7zip to credits
-- add IcoFX to credits
 
 - exclude extras (e.g. settings) in a separate binary
   first test it with an about dialog
