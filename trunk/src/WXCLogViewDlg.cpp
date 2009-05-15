@@ -100,8 +100,6 @@ void WXCLogViewDlg::Init ()
 	if ( iWidthStr > iWidthMax )
 		iWidthStr = iWidthMax;
 
-	// XXX (*pCtrl) << wxString::Format("\n\niWidthStr: %d\tiWidthMax: %d\n%s", iWidthStr, iWidthMax, strL);
-
 	// arrange
 	wxSizer* pSizer = new wxBoxSizer(wxVERTICAL);
 	pSizer->Add(pCtrl, wxSizerFlags(1).Expand());
@@ -111,7 +109,7 @@ void WXCLogViewDlg::Init ()
 
 	Center();
 
-	pCtrl->SetInsertionPointEnd();
+	while (	pCtrl->ScrollPages(1) );
 }
 
 void WXCLogViewDlg::OnClose (wxCloseEvent& event)

@@ -77,7 +77,6 @@
 			<Tool
 				Name="VCManifestTool"
 				OutputManifestFile=".out\$(ConfigurationName)\$(ProjectName)_$(ConfigurationName)_msvc.exe.manifest"
-				EmbedManifest="false"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -93,7 +92,6 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				Description=""
 				CommandLine=""
 			/>
 		</Configuration>

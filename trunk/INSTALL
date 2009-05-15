@@ -29,13 +29,15 @@ FILE & DIRECTORY LISTING
  graphic/       - icons and other graphic stuff for wxCron
 
  -- (extra files and directories in the source package) --
- include/       - wxCron header files
- src/           - wxCron source files
- graphic/src    - SVG source files for graphic stuff
- BUILD          - informations how to build wxCron
- TODO           - This is just a little TODO list for wxCron.
-                  Please use the bugtracking-system on BerliOS instead
-                  of this file.
- wxCron.workspace - workspace file for the IDE Code::Blocks
- wxCron.cbp  	- project file for the IDE Code::Blocks
- wxCron.rc		- resource file for wxCron
+ include/				- wxCron header files
+ src/					- wxCron source files
+ graphic/src			- SVG source files for graphic stuff
+ build/					- project-files for different build-environments
+ build/README			- informations how to build wxCron
+ build/wxCron.workspace - workspace file for the IDE Code::Blocks
+ build/wxCron.cbp  		- project file for the IDE Code::Blocks
+ build/wxCron.sln		- workspace (solution) file for IDE MSVC++ 2008 Express Edition
+ build/wxCron.vcproj	- project file for IDE MSVC++ 2008 Express Edition
+ TODO					- This is just a little TODO list for wxCron.
+						  Please use the bugtracking-system on BerliOS instead
+						  of this file.

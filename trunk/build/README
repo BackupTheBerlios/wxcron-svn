@@ -11,20 +11,30 @@ or build environment.
 
 Build on Windows with MinGW and Code::Blocks
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-1. Download the GNU based compiler system for Windows from
+1. Get the wxWidgets sources from <http://www.wxwidgets.org> and build them.
+2. Download the GNU based compiler system for Windows from
    <http://www.mingw.org> and install it.
-2. Get the wxWidgets sources from <http://www.wxwidgets.org> and build them.
 3. Download the IDE Code::Blocks from <http://www.codeblocks.org>
    and install it.
 4. Setup Code::Blocks to use the installed MinGW. Take care because Code::Blocks
    comes with an own MinGW. But you shouldn't use it.
-5. Open the workspace file "wxCron.workspace" with Code::Blocks.
+5. Open the workspace file "build/wxCron.workspace" with Code::Blocks.
 6. Go to the menu "Settings/Global variables..." and set the variables
    #wx and #wxversion.
 7. Then select the correct build target in the menu "Build/Select target".
    Which target you need depends on the configuration (debug, release,
    static, dynamic) you build wxWidgets.
 8. Just build wxCron with the menu entry "Build/Build and run".
+
+Build on Windows with Microsoft Visual C++ 2008 Express Edition
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1. Get the wxWidgets sources from <http://www.wxwidgets.org> and build them.
+2. Set on Windows the environment variable WXWIN to the directory
+   where wxWidgets is installed.
+1. Install the IDE Microsoft Visual C++ 2008 Express Edition. Different
+   edition or version of that IDE should work, too.
+2. Open the file "build/wxCron.sln" with the IDE.
+3. Just build wxCron with the IDE.
 
 More detailes and help
 ~~~~~~~~~~~~~~~~~~~~~~
