@@ -102,8 +102,9 @@ void WXCJob::Start ()
         }
     }
 
+	// the job wasn't started before
     if ( !(dtNextExec.IsValid()) )
-        dtNextExec = time_.GetNext();
+		dtNextExec = wxDateTime::Now() + wxTimeSpan(0, 0, 15);
 
     // start the timer
     pTimer_->Start(dtNextExec);

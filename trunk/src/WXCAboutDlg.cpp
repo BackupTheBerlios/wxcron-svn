@@ -75,7 +75,7 @@ WXCAboutDlg::WXCAboutDlg ()
     wxStaticText* pCopy = new wxStaticText(this, wxID_ANY, "Copyright (C) 2008 Christian Buhtz <blackfisk@web.de>");
     wxStaticText* pDesc = new wxStaticText(this, wxID_ANY, _("A cron-like job scheduler."), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE);
     WXCHyperlinkCtrl* pWeb = new WXCHyperlinkCtrl(this, wxID_ANY, "wxcron.berlios.de", "http://wxcron.berlios.de");
-    wxStaticText* pLicense = new wxStaticText(this, wxID_ANY, _("This program comes with ABSOLUTELY NO WARRANTY;\nThis is free software, and you are welcome\nto redistribute it under certain conditions;\nfor details select the menu Help/License\nor click this button"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE);
+    wxStaticText* pLicense = new wxStaticText(this, wxID_ANY, _("This program comes with ABSOLUTELY NO WARRANTY;\nThis is free software, and you are welcome\nto redistribute it under certain conditions;\nfor details please click this button"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE);
     wxButton* pViewLicense = new wxButton(this, WXCABOUTDLG_ID_VIEWLICENSE, _("view License (GPLv3)"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT);
     font = pLicense->GetFont();
     font.SetFaceName("Courier New");
@@ -154,7 +154,7 @@ WXCAboutDlg::WXCAboutDlg ()
     pTopSizer->Add(pDesc, wxSizerFlags(0).Center().Border());
     pTopSizer->Add(pWeb, wxSizerFlags(0).Center());
     pTopSizer->Add(pLicense, wxSizerFlags(0).Center().Border(wxTOP, 10));
-    pTopSizer->Add(pViewLicense, wxSizerFlags(0).Center().Border(wxBOTTOM, 10));
+    pTopSizer->Add(pViewLicense, wxSizerFlags(0).Center().Border(wxBOTTOM | wxTOP, 10));
     pMLeftSizer->Add(pDev, wxSizerFlags(0).Center());
     pMLeftSizer->Add(pDev1, wxSizerFlags(0).Border(wxBOTTOM, 3));
     pMLeftSizer->Add(pSupporters, wxSizerFlags(0).Center().Border(wxTOP, 10));
