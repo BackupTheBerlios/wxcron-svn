@@ -11,6 +11,7 @@
 - "Edit crontab"
 - "check crontab"
 - BUGFIX: freezing wxCron with hidden jobs
+- build with official wxWidgets2.9.0
 
 <<< 0.1.1 >>>
 - BUGFIX: correct saving and parsing of timestamps

@@ -72,7 +72,7 @@ WXCAboutDlg::WXCAboutDlg ()
     font.SetPointSize(font.GetPointSize()+5);
     font.SetWeight(wxFONTWEIGHT_BOLD);
     pName->SetFont(font);
-    wxStaticText* pCopy = new wxStaticText(this, wxID_ANY, "Copyright (C) 2008 Christian Buhtz <blackfisk@web.de>");
+    wxStaticText* pCopy = new wxStaticText(this, wxID_ANY, "Copyright (C) 2008-2009 Christian Buhtz <blackfisk@web.de>");
     wxStaticText* pDesc = new wxStaticText(this, wxID_ANY, _("A cron-like job scheduler."), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE);
     WXCHyperlinkCtrl* pWeb = new WXCHyperlinkCtrl(this, wxID_ANY, "wxcron.berlios.de", "http://wxcron.berlios.de");
     wxStaticText* pLicense = new wxStaticText(this, wxID_ANY, _("This program comes with ABSOLUTELY NO WARRANTY;\nThis is free software, and you are welcome\nto redistribute it under certain conditions;\nfor details please click this button"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE);
