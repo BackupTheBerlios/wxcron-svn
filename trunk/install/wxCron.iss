@@ -57,11 +57,20 @@ Source: "D:\Garage\projekte\wxCron\trunk\graphic\wxCron.ico"; DestDir: "{app}\gr
 Source: "D:\Garage\projekte\wxCron\trunk\graphic\wxCron_text.png"; DestDir: "{app}\graphic"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
+[Tasks]
+Name: startupmenu; Description: {cm:AddToStartupMenu}; GroupDescription: {cm:AdditionalIcons}; Flags: unchecked
+
+[CustomMessages]
+english.AddToStartupMenu=start automaticly if windows starts
+german.AddToStartupMenu=automatisch starten wenn Windows startet
+
 [Icons]
 Name: "{group}\{cm:UninstallProgram,wxCron}"; Filename: "{uninstallexe}"
+Name: {userstartup}\wxCron; Filename: {app}\wxCron.exe; WorkingDir: {app}; IconFilename: {app}\wxCron.exe
 
 [Run]
 Filename: "{app}\wxCron.exe"; Description: "{cm:LaunchProgram,wxCron}"; Flags: nowait postinstall skipifsilent
+
 
 
 
