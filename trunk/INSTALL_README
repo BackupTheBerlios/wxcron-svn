@@ -2,7 +2,7 @@
                              ==== INSTALL ====
 
                                -- wxCron --
-                              Version 0.2.0
+                              Version 0.2.1
 -------------------------------------------------------------------------------
 
 There is no need for a install routine. Just unpack all files to a directory
@@ -23,21 +23,28 @@ FILE & DIRECTORY LISTING
  CHANGELOG      - differences between the blackfisk versions
  HELP			- help file for wxCron
  wxCron.exe  	- the windows (32bit) binary
+ graphic/       - icons and other graphic stuff for wxCron
+
+ -- (files created in system directories) --
+Please see that this files are not stored in the application directory.
+It depends on the system you use where this files are stored.
  crontab        - the crontab file where you can define the jobs
  wxCron.conf	- configuration file for wxCron
  wxCron.tsmp	- timestamp file to remember the last job execution
- graphic/       - icons and other graphic stuff for wxCron
-
+ wxCron.log		- log file for activies and errors
+  
  -- (extra files and directories in the source package) --
- include/				- wxCron header files
- src/					- wxCron source files
- graphic/src			- SVG source files for graphic stuff
- build/					- project-files for different build-environments
- build/README			- informations how to build wxCron
- build/wxCron.workspace - workspace file for the IDE Code::Blocks
- build/wxCron.cbp  		- project file for the IDE Code::Blocks
- build/wxCron.sln		- workspace (solution) file for IDE MSVC++ 2008 Express Edition
- build/wxCron.vcproj	- project file for IDE MSVC++ 2008 Express Edition
- TODO					- This is just a little TODO list for wxCron.
-						  Please use the bugtracking-system on BerliOS instead
-						  of this file.
+ include/			- wxCron header files
+ src/				- wxCron source files
+ graphic/src		- SVG source files for graphic stuff
+ TODO				- This is just a little TODO list for wxCron.
+					  Please use the bugtracking-system on BerliOS instead
+					  of this file.
+ build/				- project-files for different build-environments
+ |- README				- informations how to build wxCron
+ |- wxCron.workspace	- workspace file for the IDE Code::Blocks
+ |-	wxCron.cbp  		- project file for the IDE Code::Blocks
+ |- wxCron.sln			- workspace (solution) file for IDE MSVC++ 2008 Express Edition
+ |- wxCron.vcproj		- project file for IDE MSVC++ 2008 Express Edition
+ install/			- files to create install packages
+ |- wxCron.iss			- InnoSetup script to create install routine

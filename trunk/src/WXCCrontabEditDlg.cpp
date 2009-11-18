@@ -38,7 +38,7 @@ END_EVENT_TABLE()
 WXCCrontabEditDlg::WXCCrontabEditDlg ()
             : wxDialog( NULL,
 					    wxID_ANY,
-						wxString(_("Edit ")) + WXC_CRONTAB,
+						wxString(_("Edit ")) + WXCApp::GetCrontabFilename(),
 						wxDefaultPosition,
 						wxDefaultSize,
 						wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER)
@@ -59,14 +59,14 @@ void WXCCrontabEditDlg::ReadCrontab (wxString& strCrontabContent, unsigned int& 
 	iLineLength			= 0;
 	iLineCount			= 0;
 
-    wxTextFile file(WXC_CRONTAB);
+    wxTextFile file(WXCApp::GetCrontabFilename());
 
 	file.Open();
 
     // error while opening
     if ( !(file.IsOpened()) )
     {
-        wxMessageBox(wxString::Format("Can not open the crontab file '%s' for reading.", WXC_CRONTAB), "Error");
+        wxMessageBox(wxString::Format("Can not open the crontab file '%s' for reading.", WXCApp::GetCrontabFilename()), "Error");
         return;
     }
 
@@ -88,12 +88,12 @@ void WXCCrontabEditDlg::ReadCrontab (wxString& strCrontabContent, unsigned int& 
 
 void WXCCrontabEditDlg::SaveCrontab (wxString& strCrontabContent)
 {
-	wxTempFile file(WXC_CRONTAB);
+	wxTempFile file(WXCApp::GetCrontabFilename());
 
     // error while opening
     if ( !(file.IsOpened()) )
     {
-        wxMessageBox(wxString::Format("Can not open the crontab file '%s' writing.", WXC_CRONTAB), "Error");
+        wxMessageBox(wxString::Format("Can not open the crontab file '%s' writing.", WXCApp::GetCrontabFilename()), "Error");
         return;
     }
 

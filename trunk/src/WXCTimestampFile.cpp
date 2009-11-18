@@ -28,6 +28,7 @@
 
 #include "WXCLog.h"
 #include "WXCCrontab.h"
+#include "WXCApp.h"
 #include "wxCron.h"
 
 
@@ -95,19 +96,19 @@ bool WXCTimestampFile::Read ()
     vecTimestamps_.clear();
 
     // check if timestamp file exists
-    if ( !(wxFile::Exists(WXC_TIMESTAMP)) )
+	if ( !(wxFile::Exists(WXCApp::GetTimestampFilename())) )
     {
-        wxFile file(WXC_TIMESTAMP, wxFile::write);
-        WXCLog::Do(wxString::Format("Timestamp-file %s doesn't exists! Create a default one...", WXC_TIMESTAMP));
+        wxFile file(WXCApp::GetTimestampFilename(), wxFile::write);
+        WXCLog::Do(wxString::Format("Timestamp-file %s doesn't exists! Create a default one...", WXCApp::GetTimestampFilename()));
     }
 
     // create temporary file
-    wxTextFile file(WXC_TIMESTAMP);
+    wxTextFile file(WXCApp::GetTimestampFilename());
 
     // open the file
     if (file.Open() == false)
     {
-        WXCLog::Do(wxString::Format("Can not open the timestamp file %s for reading.", WXC_TIMESTAMP));
+        WXCLog::Do(wxString::Format("Can not open the timestamp file %s for reading.", WXCApp::GetTimestampFilename()));
         return false;
     }
 
@@ -133,7 +134,7 @@ bool WXCTimestampFile::Read ()
 bool WXCTimestampFile::Save ()
 {
     // create temporary file
-    wxTempFile file(WXC_TIMESTAMP);
+    wxTempFile file(WXCApp::GetTimestampFilename());
 
     // is open?
     if ( file.IsOpened() == false )
@@ -153,7 +154,7 @@ bool WXCTimestampFile::Save ()
     // close the temporary file and replace WXC_TIMESTAMP with it
     if ( file.Commit() == false )
     {
-        WXCLog::Do(wxString::Format("Can not replace the old timestamp file %s with a new version of it.", WXC_TIMESTAMP));
+        WXCLog::Do(wxString::Format("Can not replace the old timestamp file %s with a new version of it.", WXCApp::GetTimestampFilename()));
         return false;
     }
 

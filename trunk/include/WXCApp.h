@@ -38,6 +38,10 @@ class WXCApp : public wxApp
         ///
         WXCTaskBarIcon*     pTaskBarIcon_;
 
+		/** Return the application config dir for the current user.
+			If it doesn't exists it will create it. */
+		static wxString GetUserConfigDir ();
+
     public:
         /// ctor
         WXCApp ();
@@ -48,6 +52,15 @@ class WXCApp : public wxApp
         static wxString GetFullApplicationName ();
         /// return major, minor, release number and extensions as string
         static wxString GetVersion ();
+
+		// Return the crontab filename.
+		static wxString GetCrontabFilename ();
+		// Return the log filename.
+		static wxString GetLogFilename ();
+		// Return the timestamp filename.
+		static wxString GetTimestampFilename ();
+		// Return the config filename.
+		static wxString GetConfigFilename ();
 
         /// close the application
         void DoClose ();

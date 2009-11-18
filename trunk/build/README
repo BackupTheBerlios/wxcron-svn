@@ -2,13 +2,27 @@
                               ==== BUILD ====
 
                                -- wxCron --
-                              Version 0.2.0
+                              Version 0.2.1
 -------------------------------------------------------------------------------
 
 WxCron want to support all plattforms, architectures and build environments!
 Please contact me if you need support for a undescribed plattform, architecture
 or build environment.
 
+
+Build on Windows with MS Visual Studio/C++
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1. Use your installed MS Visual C++ IDE/compiler or download
+   a free version here: <http://www.microsoft.com/express/download/>
+2. Get the wxWidgets sources from <http://www.wxwidgets.org> and
+   build ("Debug DLL" and "Release") them with MS Visual C++.
+3. Set an enviromentvariable %WXWIN% to the directory where you
+   saved the sources of wxWidgets.
+5. Open the file "build/wxPTB.sln" with MS Visual C++ IDE.
+6. Then select the correct build config ("Debug Dynamic" or "Release Static").
+   Which target you need depends on the configuration you build wxWidgets with.
+   
+   
 Build on Windows with MinGW and Code::Blocks
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 1. Get the wxWidgets sources from <http://www.wxwidgets.org> and build them.
@@ -26,16 +40,8 @@ Build on Windows with MinGW and Code::Blocks
    static, dynamic) you build wxWidgets.
 8. Just build wxCron with the menu entry "Build/Build and run".
 
-Build on Windows with Microsoft Visual C++ 2008 Express Edition
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-1. Get the wxWidgets sources from <http://www.wxwidgets.org> and build them.
-2. Set on Windows the environment variable WXWIN to the directory
-   where wxWidgets is installed.
-1. Install the IDE Microsoft Visual C++ 2008 Express Edition. Different
-   edition or version of that IDE should work, too.
-2. Open the file "build/wxCron.sln" with the IDE.
-3. Just build wxCron with the IDE.
 
 More detailes and help
 ~~~~~~~~~~~~~~~~~~~~~~
-Please feel free to contact me if you need more help to build wxCron!
+Please feel free to contact me if you need more help to build wxCron! Look in
+the README file for more contact informations.

@@ -2,26 +2,26 @@
 #M    S   T M W    Befehl
 
 # each hour 3. minute
-3     *   * * *    calc.exe
+#3     *   * * *    calc.exe
 
 # 5 minute intervals
-*/5   *   * * *    calc.exe
+#*/5   *   * * *    calc.exe
 
 # wendsday 11:38
-38    11  * * 3    calc.exe
+#38    11  * * 3    calc.exe
 
 # each midnight 0:00
-0     0   * * *    calc.exe
+#0     0   * * *    calc.exe
 
 # each thursday OR 7. of a month at 3:00 a'clock
-0     3   7 * 4    calc.exe
+#0     3   7 * 4    calc.exe
 
 # monday till friday 1:20 and 1:30
-20,50 1   * * 1-5  calc.exe
+#20,50 1   * * 1-5  calc.exe
 
 # each midnight 0:00 but don't catchup the job
 # if the machine wasn't on power at last midnight
-@nocatchup 0     0   * * *    calc.exe
+#@nocatchup 0     0   * * *    calc.exe
 
 #hide the running job
-@hide 0 0 * * * script.bat
+#@hide 0 0 * * * script.bat

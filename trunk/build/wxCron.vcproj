@@ -337,7 +337,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\INSTALL"
+				RelativePath="..\INSTALL_README"
 				>
 			</File>
 			<File
@@ -345,11 +345,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\README"
+				RelativePath=".\README"
 				>
 			</File>
 			<File
-				RelativePath=".\README"
+				RelativePath="..\README"
 				>
 			</File>
 			<File

@@ -58,12 +58,12 @@ void WXCLogViewDlg::Init ()
 {
     // the log file
     wxTextFile fileLog;
-	fileLog.Open(WXC_LOG);
+	fileLog.Open(WXCApp::GetLogFilename());
 
     // error while opening
     if ( !(fileLog.IsOpened()) )
     {
-        wxMessageBox(wxString::Format("Can not open the log file %s.", WXC_LOG), "Error");
+        wxMessageBox(wxString::Format("Can not open the log file %s.", WXCApp::GetLogFilename()), "Error");
         return;
     }
 

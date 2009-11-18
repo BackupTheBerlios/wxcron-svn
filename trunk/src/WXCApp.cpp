@@ -25,6 +25,7 @@
 
 #include <wx/timer.h>
 #include <wx/snglinst.h>
+#include <wx/stdpaths.h>
 
 #include "WXCTaskBarIcon.h"
 #include "WXCCrontab.h"
@@ -65,9 +66,73 @@ WXCApp::WXCApp ()
                             WXC_VERSION_EXTENSION);
 }
 
+/*static*/ wxString WXCApp::GetUserConfigDir ()
+{
+	wxString str = wxStandardPaths::Get().GetUserConfigDir();
+
+	if ( false == str.EndsWith(wxFILE_SEP_PATH) )
+		str << wxFILE_SEP_PATH;
+
+	str << WXC_APP_NAME;
+
+	if ( false == wxDirExists(str) )
+		wxMkDir(str);
+
+	return str;
+}
+
+/*static*/ wxString WXCApp::GetCrontabFilename ()
+{
+	wxString str = GetUserConfigDir();
+
+	str << wxFILE_SEP_PATH
+		<< "crontab";
+
+	return str;
+}
+
+/*static*/ wxString WXCApp::GetLogFilename ()
+{
+	wxString str = GetUserConfigDir();
+
+	str << wxFILE_SEP_PATH
+		<< "wxCron.log";
+
+	return str;
+}
+
+/*static*/ wxString WXCApp::GetTimestampFilename ()
+{
+	wxString str = GetUserConfigDir();
+
+	str << wxFILE_SEP_PATH
+		<< "wxCron.tsmp";
+
+	return str;
+}
+
+/*static*/ wxString WXCApp::GetConfigFilename ()
+{
+	wxString str = GetUserConfigDir();
+
+	str << wxFILE_SEP_PATH
+		<< "wxCron.conf";
+
+	return str;
+}
+
+
 /*virtual*/ bool WXCApp::OnInit()
 {
-    // log start
+	// init log and config
+	WXCLog::Instance().Init();
+	WXCConfig::Instance().Init();
+
+	/* we need to handle the log file size
+	   after init of the config file */
+	WXCLog::Instance().CareSize();
+
+    // log start	
     WXCLog::Do(wxEmptyString, false);
     WXCLog::Do(wxString::Format("%s started...", GetFullApplicationName()));
 

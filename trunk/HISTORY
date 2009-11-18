@@ -2,7 +2,7 @@
                              ==== HISTORY ====
 
                                -- wxCron --
-                              Version 0.2.0
+                              Version 0.2.1
 -------------------------------------------------------------------------------
 
 *** May 2008 ***
@@ -19,3 +19,6 @@ A bugfixed release.
 
 *** 5th October 2009 (Version 0.2.0 ) ***
 A heavy bug was fixed and a lot of new features added.
+
+*** 18th November 2009 (Verson 0.2.1) ***
+More portable use of system directories and a install routine.

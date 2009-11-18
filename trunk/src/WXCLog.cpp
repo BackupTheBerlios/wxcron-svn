@@ -26,16 +26,15 @@
 #include <wx/datetime.h>
 
 #include "WXCConfig.h"
+#include "WXCApp.h"
 #include "wxCron.h"
 
 /*static*/ WXCLog WXCLog::sLog_;
 
 
 WXCLog::WXCLog ()
-      : lMaxSize_(WXCConfig::Instance().GetMaxLogFileSizeInKB()*1024),
-        fileLog_(WXC_LOG, wxFile::write_append)
+      : lMaxSize_(-1)	// -1 means it is not initializied
 {
-    CareSize();
 }
 
 
@@ -43,6 +42,25 @@ WXCLog::WXCLog ()
 {
 }
 
+void WXCLog::Init ()
+{
+	if ( lMaxSize_ != -1 )
+	{
+		wxLogFatalError
+		(
+			"Try to initialize a still initilized log object.\n" \
+			"in WXCLog::Init()\n" \
+			"Please contact the developer!"
+		);
+		return;
+	}
+		
+	// max log file size
+	// not able to set because the config file wasn't read at this point
+
+	// open the physical log file
+	fileLog_.Open(WXCApp::GetLogFilename(), wxFile::write_append);
+}
 
 long WXCLog::GetMaxSize ()
 {
@@ -52,6 +70,9 @@ long WXCLog::GetMaxSize ()
 
 void WXCLog::CareSize ()
 {
+	// set max log file size
+	lMaxSize_ = WXCConfig::Instance().GetMaxLogFileSizeInKB() * 1024;
+
     // the size does not matter
     if (GetMaxSize() <= 0)
         return;
@@ -65,9 +86,9 @@ void WXCLog::CareSize ()
         // close the file
         fileLog_.Close();
         // backup the file
-        ::wxRenameFile(WXC_LOG, WXC_LOG_OLD, true);
+        ::wxRenameFile(WXCApp::GetLogFilename(), WXCApp::GetLogFilename() + ".old", true);
         // create a new empty file
-        fileLog_.Open(WXC_LOG, wxFile::write_append);
+        fileLog_.Open(WXCApp::GetLogFilename(), wxFile::write_append);
     }
 }
 

@@ -2,8 +2,12 @@
                              ==== CHANGELOG ====
 
                                -- wxCron --
-							   Version 0.2.0
+							   Version 0.2.1
 -------------------------------------------------------------------------------
+
+<<< 0.2.1 >>>
+- more portable use of system directories
+- a install routine
 
 <<< 0.2.0 >>>
 - @hide as a option for jobs

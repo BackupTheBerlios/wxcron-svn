@@ -2,7 +2,7 @@
                              ==== README ====
 
                                -- wxCron --
-                              Version 0.2.0
+                              Version 0.2.1
 -------------------------------------------------------------------------------
 
 DESCRIPTION
@@ -18,11 +18,11 @@ Please see the file LICENSE for more details.
 
 INSTALLATION
 ~~~~~~~~~~~~
-Please see the file INSTALL for more details.
+Please see the file INSTALL_README for more details.
 
 FILE & DIRECTORY LISTING
 ~~~~~~~~~~~~~~~~~~~~~~~~
-Please see the file INSTALL for a detailed listing.
+Please see the file INSTALL_README for a detailed listing.
 
 CONTACT & HELP & SUPPORT
 ~~~~~~~~~~~~~~~~~~~~~~~~

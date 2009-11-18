@@ -28,6 +28,7 @@
 
 #include "WXCLog.h"
 #include "wxCron.h"
+#include "WXCApp.h"
 
 /*static*/ WXCConfig WXCConfig::sConfig_;
 
@@ -35,11 +36,15 @@ WXCConfig::WXCConfig ()
          : lMaxSize_(1024),
            lCheckCrontab_(0)
 {
+}
+
+void WXCConfig::Init ()
+{
     // check if config file exists
-    if ( !(wxFile::Exists(WXC_CONFIG)) )
+	if ( !(wxFile::Exists(WXCApp::GetConfigFilename())) )
     {
-        wxFile file(WXC_CONFIG, wxFile::write);
-        WXCLog::Do(wxString::Format("Log-file %s doesn't exists! Create a default one...", WXC_CONFIG));
+        wxFile file(WXCApp::GetConfigFilename(), wxFile::write);
+        WXCLog::Do(wxString::Format("Log-file %s doesn't exists! Create a default one...", WXCApp::GetConfigFilename()));
 
         file.Write
         (
@@ -50,7 +55,7 @@ WXCConfig::WXCConfig ()
                 "# Intervall in minutes to check crontab for modifications.\n" \
                 "# 0 = Check on only on startup of wxCron.\n" \
                 "crontab-check=%d\n",
-                WXC_CONFIG,
+                WXCApp::GetConfigFilename(),
                 GetMaxLogFileSizeInKB(),
                 GetCheckCrontabIntervallInMinutes()
             )
@@ -61,14 +66,13 @@ WXCConfig::WXCConfig ()
     ReadConfig();
 }
 
-
 /*virtual*/ WXCConfig::~WXCConfig ()
 {
 }
 
 void WXCConfig::ReadConfig ()
 {
-    wxFileInputStream   is(WXC_CONFIG);
+    wxFileInputStream   is(WXCApp::GetConfigFilename());
     wxFileConfig        fileConfig(is);
     long                lVal;
 
@@ -83,7 +87,7 @@ void WXCConfig::ReadConfig ()
 
 bool WXCConfig::SaveConfig ()
 {
-    wxFileInputStream   is(WXC_CONFIG);
+    wxFileInputStream   is(WXCApp::GetConfigFilename());
     wxFileConfig        fileConfig(is);
 
     // maximum log-file size
@@ -93,11 +97,11 @@ bool WXCConfig::SaveConfig ()
     fileConfig.Write("crontab-check", lCheckCrontab_);
 
     // save
-    wxFileOutputStream os(WXC_CONFIG);
+    wxFileOutputStream os(WXCApp::GetConfigFilename());
 
     if ( !(fileConfig.Save(os)) )
     {
-        WXCLog::Do(wxString::Format("Error while saving the config file %s.", WXC_CONFIG));
+        WXCLog::Do(wxString::Format("Error while saving the config file %s.", WXCApp::GetConfigFilename()));
         return false;
     }
 

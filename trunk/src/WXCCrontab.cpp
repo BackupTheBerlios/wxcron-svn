@@ -48,14 +48,14 @@ WXCCrontab::WXCCrontab ()
     wxTextFile file;
 
     // open the file
-    if ( file.Open(WXC_CRONTAB) == false )
+	if ( file.Open(WXCApp::GetCrontabFilename()) == false )
     {
-        WXCLog::Do(wxString::Format("ERROR: The crontab file %s couldn't be loaded!", WXC_CRONTAB));
+        WXCLog::Do(wxString::Format("ERROR: The crontab file %s couldn't be loaded!", WXCApp::GetCrontabFilename()));
         return false;
     }
 
     // remember modification time
-    Instance().timeMod_ = wxFileName(WXC_CRONTAB).GetModificationTime();
+    Instance().timeMod_ = wxFileName(WXCApp::GetCrontabFilename()).GetModificationTime();
 
     // clear job vector and their timers
     Instance().vecJobs_.clear();
@@ -99,7 +99,7 @@ WXCCrontab::WXCCrontab ()
             {
                 wxString strErr = wxString::Format("ERROR: Line %d in %s is not valid!\n\"%s\"",
                                                    lLine,
-                                                   WXC_CRONTAB,
+                                                   WXCApp::GetCrontabFilename(),
                                                    strLine);
                 wxLogError(strErr);
                 WXCLog::Do(strErr);
@@ -115,7 +115,7 @@ WXCCrontab::WXCCrontab ()
 
 /*static*/ void WXCCrontab::CheckModification ()
 {
-    if ( Instance().timeMod_ != wxFileName(WXC_CRONTAB).GetModificationTime() )
+    if ( Instance().timeMod_ != wxFileName(WXCApp::GetCrontabFilename()).GetModificationTime() )
     {
         WXCLog::Do("crontab was modified. Read it again...");
 

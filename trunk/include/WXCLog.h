@@ -44,15 +44,19 @@ class WXCLog
         ///
         wxString                strLastMessage_;
 
-        /** take care that size of the logfile is not to big */
-        void CareSize ();
-
         /// ctor
         WXCLog ();
 
     public:
         /// virtual dtor
         virtual ~WXCLog ();
+
+		/// need to be called first!
+		void Init();
+
+        /** This methode take care that size of the logfile is not to big.
+			Call this methode after WXCConfig init! */
+        void CareSize ();
 
         /// return the maximum size in bytes
         long GetMaxSize ();

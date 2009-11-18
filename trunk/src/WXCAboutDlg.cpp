@@ -143,6 +143,10 @@ WXCAboutDlg::WXCAboutDlg ()
                                                   "Jan Kechel (Publictimestamp.org)",
                                                   "",
                                                   _(" The maintainer of publictimestamp.org."));
+    wxSizer* pSupporters4 = CreateThirdPartySizer("http://qsc.de",
+                                                  "QSC AG",
+                                                  "",
+                                                  _(" DSL Provider take good care of\nmy connection to the world."));
 
     wxButton* pOk = new wxButton(this, WXCABOUTDLG_ID_OK, "OK");
 
@@ -161,9 +165,10 @@ WXCAboutDlg::WXCAboutDlg ()
     pMLeftSizer->Add(pSupporters1, wxSizerFlags(0).Border(wxBOTTOM, 3));
     pMLeftSizer->Add(pSupporters2, wxSizerFlags(0).Border(wxBOTTOM, 3));
 	pMLeftSizer->Add(pSupporters3, wxSizerFlags(0).Border(wxBOTTOM, 3));
-    pMRightSizer->Add(pThird, wxSizerFlags(0).Center());
-    pMRightSizer->Add(pThird1, wxSizerFlags(0).Border(wxBOTTOM, 3));
-    pMRightSizer->Add(pTools, wxSizerFlags(0).Center().Border(wxTOP, 10));
+	pMLeftSizer->Add(pSupporters4, wxSizerFlags(0).Border(wxBOTTOM, 3));
+    pMLeftSizer->Add(pThird, wxSizerFlags(0).Center().Border(wxTOP, 10));
+    pMLeftSizer->Add(pThird1, wxSizerFlags(0).Border(wxBOTTOM, 3));
+    pMRightSizer->Add(pTools, wxSizerFlags(0).Center());
     pMRightSizer->Add(pTools1, wxSizerFlags(0).Border(wxBOTTOM, 3));
     pMRightSizer->Add(pTools2, wxSizerFlags(0).Border(wxBOTTOM, 3));
     pMRightSizer->Add(pTools3, wxSizerFlags(0).Border(wxBOTTOM, 3));

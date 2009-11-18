@@ -2,7 +2,7 @@
                              ==== CREDITS ====
 
                                -- wxCron --
-                              Version 0.2.0
+                              Version 0.2.1
 -------------------------------------------------------------------------------
 
 Thanks to...
@@ -29,6 +29,9 @@ Thanks to...
 
 - Jan Kechel - The maintainer of <http://publictimestamp.org>
 
+- QSC
+  DSL provider that take a good care of my connection to the world
+
 - 7-Zip
   It is a file archiver with a high compression ratio.
   <http://www.7-zip.org/>
@@ -39,6 +42,9 @@ Thanks to...
 - Inkscape
   Open Source vector graphics editor, using the W3C standard Scalable
   Vector Graphics (SVG) file format. <http://www.inkscape.org>
+
+- Inno Setup
+  Create a install routine for windows. <http://www.jrsoftware.org/isinfo.php>
 
 - de.comp.os.unix.misc
   checking the rules of cron

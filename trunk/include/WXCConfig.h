@@ -45,6 +45,9 @@ class WXCConfig
         /// virtual dtor
         virtual ~WXCConfig ();
 
+		/// need to be called first!
+		void Init ();
+
         ///
         static WXCConfig& Instance ()
         {
