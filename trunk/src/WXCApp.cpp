@@ -192,7 +192,18 @@ void WXCApp::OnEventLoopEnter(wxEventLoopBase* WXUNUSED(loop))
 void WXCApp::OnFileSystemEvent(wxFileSystemWatcherEvent& rEvent)
 {
     if ( rEvent.GetChangeType() == wxFSW_EVENT_MODIFY )
-        WXCCrontab::CheckModification();
+    {
+        if ( WXCCrontab::CheckModification() )
+        {
+            pTaskBarIcon_->ShowBalloon
+            (
+                "wxCron",
+                _("crontab file was modified and re-readed"),
+                11000,
+                wxICON_INFORMATION
+            );
+        }
+    }
 }
 
 /*virtual*/ int WXCApp::OnExit()
