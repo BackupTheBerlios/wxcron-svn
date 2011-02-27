@@ -32,8 +32,6 @@ class WXCConfigDlg : public wxDialog
     private:
         ///
         wxSpinCtrl*         pSpinMaxLog_;
-        ///
-        wxSpinCtrl*         pSpinCheckCrontab_;
 
         ///
         void ReadDataFromConfig ();

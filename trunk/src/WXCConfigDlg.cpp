@@ -47,8 +47,7 @@ END_EVENT_TABLE()
 
 WXCConfigDlg::WXCConfigDlg ()
             : wxDialog (NULL, wxID_ANY, _("Settings for wxCron")),
-              pSpinMaxLog_(NULL),
-              pSpinCheckCrontab_(NULL)
+              pSpinMaxLog_(NULL)
 {
     // the book
     wxNotebook* pBook = new wxNotebook(this, wxID_ANY);
@@ -60,15 +59,10 @@ WXCConfigDlg::WXCConfigDlg ()
     wxStaticText* pStaticMaxLog = new wxStaticText(pPage, wxID_ANY, _("size (in KB) of application logfile: "));
     pSpinMaxLog_ = new wxSpinCtrl(pPage, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, INT_MAX);
 
-    // check intervall
-    wxStaticText* pStaticCheckCrontab = new wxStaticText(pPage, wxID_ANY, _("Intervall in minutes to check crontab for modifications: "));
-    pSpinCheckCrontab_ = new wxSpinCtrl(pPage, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, INT_MAX);
-
+    // arrange
     wxGridBagSizer* pGBSizer = new wxGridBagSizer(5);
     pGBSizer->Add(pStaticMaxLog,        wxGBPosition(0, 0), wxGBSpan(), wxALIGN_CENTER_VERTICAL);
     pGBSizer->Add(pSpinMaxLog_,         wxGBPosition(0, 1), wxGBSpan(), wxALIGN_CENTER_VERTICAL);
-    pGBSizer->Add(pStaticCheckCrontab,  wxGBPosition(1, 0), wxGBSpan(), wxALIGN_CENTER_VERTICAL);
-    pGBSizer->Add(pSpinCheckCrontab_,   wxGBPosition(1, 1), wxGBSpan(), wxALIGN_CENTER_VERTICAL);
     wxSizer* pPageSizer = new wxBoxSizer(wxVERTICAL);
     pPageSizer->Add(pGBSizer, wxSizerFlags(0).Border());
     pPage->SetSizer(pPageSizer);
@@ -122,13 +116,11 @@ void WXCConfigDlg::OnButton_Cancel (wxCommandEvent& rEvent)
 void WXCConfigDlg::ReadDataFromConfig ()
 {
     pSpinMaxLog_        ->SetValue(WXCConfig::Instance().GetMaxLogFileSizeInKB());
-    pSpinCheckCrontab_  ->SetValue(WXCConfig::Instance().GetCheckCrontabIntervallInMinutes());
 }
 
 void WXCConfigDlg::SaveDataToConfig ()
 {
     WXCConfig::Instance().SetMaxLogFileSizeInKB(pSpinMaxLog_->GetValue());
-    WXCConfig::Instance().SetCheckCrontabIntervallInMinutes(pSpinCheckCrontab_->GetValue());
 
     WXCConfig::Instance().SaveConfig();
 }

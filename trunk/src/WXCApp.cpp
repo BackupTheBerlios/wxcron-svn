@@ -164,24 +164,6 @@ WXCApp::WXCApp ()
     // start it !
     WXCCrontab::Instance().Start ();
 
-    // check crontab for modifications periodicly?
-    if (WXCConfig::Instance().GetCheckCrontabIntervallInMinutes() > 0)
-    {
-        wxTimer* pTimer = new wxTimer(this, WXC_APP_ID_TIMER_CRONTAB);
-
-        Connect
-        (
-            WXC_APP_ID_TIMER_CRONTAB,
-            wxEVT_TIMER,
-            wxTimerEventHandler(WXCApp::OnTimer_CheckCrontab),
-            NULL,
-            this
-        );
-
-        pTimer->Start(1000 * 60 * WXCConfig::Instance().GetCheckCrontabIntervallInMinutes(),
-                      wxTIMER_CONTINUOUS);
-    }
-
     return true;
 }
 
@@ -226,9 +208,4 @@ void WXCApp::OnFileSystemEvent(wxFileSystemWatcherEvent& rEvent)
 void WXCApp::DoClose ()
 {
     wxGetApp().ExitMainLoop();
-}
-
-void WXCApp::OnTimer_CheckCrontab (wxTimerEvent& rEvent)
-{
-    WXCCrontab::CheckModification();
 }

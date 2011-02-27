@@ -34,9 +34,6 @@ class WXCConfig
         /** Maximum size of the log-file in KiloBytes.
             Set it to '0' if the maximum size does not matter. */
         long                    lMaxSize_;
-        /** Intervall in minutes to check crontab for modifications.
-            Set it to '0' to only check it on startup. */
-        long                    lCheckCrontab_;
 
         /// ctor
         WXCConfig ();
@@ -63,10 +60,6 @@ class WXCConfig
         long GetMaxLogFileSizeInKB ();
         ///
         void SetMaxLogFileSizeInKB (long lSize);
-        ///
-        long GetCheckCrontabIntervallInMinutes ();
-        ///
-        void SetCheckCrontabIntervallInMinutes (long lIntervall);
 };
 
 #endif    // WXCCONFIG_H

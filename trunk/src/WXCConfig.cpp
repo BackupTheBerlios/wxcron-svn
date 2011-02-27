@@ -33,8 +33,7 @@
 /*static*/ WXCConfig WXCConfig::sConfig_;
 
 WXCConfig::WXCConfig ()
-         : lMaxSize_(1024),
-           lCheckCrontab_(0)
+         : lMaxSize_(1024)
 {
 }
 
@@ -51,13 +50,9 @@ void WXCConfig::Init ()
             wxString::Format
             (
                 "# Maximum size of the log-file (%s) in KiloByte\n" \
-                "log-size=%d\n\n" \
-                "# Intervall in minutes to check crontab for modifications.\n" \
-                "# 0 = Check on only on startup of wxCron.\n" \
-                "crontab-check=%d\n",
+                "log-size=%d\n",
                 WXCApp::GetConfigFilename(),
-                GetMaxLogFileSizeInKB(),
-                GetCheckCrontabIntervallInMinutes()
+                GetMaxLogFileSizeInKB()
             )
         );
     }
@@ -79,10 +74,6 @@ void WXCConfig::ReadConfig ()
     // maximum log-file size
     if ( fileConfig.Read("log-size", &lVal) )
         lMaxSize_ = lVal;
-
-    // crontab check intervall
-    if ( fileConfig.Read("crontab-check", &lVal) )
-        lCheckCrontab_ = lVal;
 }
 
 bool WXCConfig::SaveConfig ()
@@ -92,9 +83,6 @@ bool WXCConfig::SaveConfig ()
 
     // maximum log-file size
     fileConfig.Write("log-size", lMaxSize_);
-
-    // crontab check intervall
-    fileConfig.Write("crontab-check", lCheckCrontab_);
 
     // save
     wxFileOutputStream os(WXCApp::GetConfigFilename());
@@ -116,14 +104,4 @@ long WXCConfig::GetMaxLogFileSizeInKB ()
 void WXCConfig::SetMaxLogFileSizeInKB (long lSize)
 {
     lMaxSize_ = lSize;
-}
-
-long WXCConfig::GetCheckCrontabIntervallInMinutes ()
-{
-    return lCheckCrontab_;
-}
-
-void WXCConfig::SetCheckCrontabIntervallInMinutes (long lIntervall)
-{
-    lCheckCrontab_ = lIntervall;
 }

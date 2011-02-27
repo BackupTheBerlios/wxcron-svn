@@ -78,11 +78,6 @@ class WXCApp : public wxApp
 
         ///
         virtual int OnExit();
-
-        ///
-        void OnTimer_CheckCrontab (wxTimerEvent& rEvent);
-
-        //static long CountString (const wxString& strSource, const wxString& strToFind);
 };
 
 DECLARE_APP(WXCApp)
