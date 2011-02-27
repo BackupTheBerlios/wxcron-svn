@@ -38,13 +38,16 @@
 IMPLEMENT_APP(WXCApp);
 
 WXCApp::WXCApp ()
-      : pTaskBarIcon_(NULL)
+      : pTaskBarIcon_(NULL),
+        pFSWatcher_(NULL)
 {
 }
 
 
 /*virtual*/ WXCApp::~WXCApp ()
 {
+    if ( pFSWatcher_ )
+        delete pFSWatcher_;
 }
 
 /*static*/ wxString WXCApp::GetFullApplicationName ()
@@ -182,6 +185,33 @@ WXCApp::WXCApp ()
     return true;
 }
 
+void WXCApp::OnEventLoopEnter(wxEventLoopBase* WXUNUSED(loop))
+{
+    if (pFSWatcher_)
+        return;
+
+    pFSWatcher_ = new wxFileSystemWatcher();
+
+    pFSWatcher_->SetOwner(this);
+
+    Connect
+    (
+        wxEVT_FSWATCHER,
+        wxFileSystemWatcherEventHandler ( WXCApp::OnFileSystemEvent )
+    );
+
+    pFSWatcher_->Add
+    (
+        wxFileName ( GetCrontabFilename().BeforeLast(wxFILE_SEP_PATH) ),
+        wxFSW_EVENT_MODIFY
+    );
+}
+
+void WXCApp::OnFileSystemEvent(wxFileSystemWatcherEvent& rEvent)
+{
+    if ( rEvent.GetChangeType() == wxFSW_EVENT_MODIFY )
+        WXCCrontab::CheckModification();
+}
 
 /*virtual*/ int WXCApp::OnExit()
 {
@@ -202,21 +232,3 @@ void WXCApp::OnTimer_CheckCrontab (wxTimerEvent& rEvent)
 {
     WXCCrontab::CheckModification();
 }
-
-/*static* long WXCApp::CountString (const wxString& strSource, const wxString& strToFind)
-{
-    long lCount     = -1;
-    long idx        = 0;
-    long idxCurr    = -(strToFind.Length());
-
-    while (idx != wxNOT_FOUND )
-    {
-        ++lCount;
-
-        idxCurr = idxCurr + idx + strToFind.Length();
-
-        idx = strSource.Mid(idxCurr).Find(strToFind);
-    }
-
-    return lCount;
-}*/

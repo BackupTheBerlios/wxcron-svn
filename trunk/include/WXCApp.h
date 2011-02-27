@@ -28,7 +28,7 @@
 class WXCTaskBarIcon;
 
 #include <wx/wx.h>
-
+#include <wx/fswatcher.h>
 #include "WXCConfig.h"
 
 ///
@@ -36,7 +36,9 @@ class WXCApp : public wxApp
 {
     private:
         ///
-        WXCTaskBarIcon*     pTaskBarIcon_;
+        WXCTaskBarIcon*         pTaskBarIcon_;
+        ///
+        wxFileSystemWatcher*    pFSWatcher_;
 
 		/** Return the application config dir for the current user.
 			If it doesn't exists it will create it. */
@@ -67,6 +69,13 @@ class WXCApp : public wxApp
 
         /// start point like main()
         virtual bool OnInit();
+
+        ///
+        void OnEventLoopEnter(wxEventLoopBase* WXUNUSED(loop));
+
+        ///
+        void OnFileSystemEvent(wxFileSystemWatcherEvent& rEvent);
+
         ///
         virtual int OnExit();
 

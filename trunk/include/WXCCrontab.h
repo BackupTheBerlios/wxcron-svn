@@ -64,8 +64,10 @@ class WXCCrontab
         bool HasLine (const wxString& strLine);
 
         /** Check if the crontab file was modifide since the
-            last read and read it again if needed. */
-        static void CheckModification ();
+            last read and read it again if needed.
+            Return 'true' if there was a modification.
+            Return 'false' if not. */
+        static bool CheckModification ();
 
         /*void XXX (const wxString& str, short iFrom, short iTo);
         void YYY (const wxString& str);*/

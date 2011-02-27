@@ -113,11 +113,15 @@ WXCCrontab::WXCCrontab ()
     return true;
 }
 
-/*static*/ void WXCCrontab::CheckModification ()
+/*static*/ bool WXCCrontab::CheckModification ()
 {
+    bool rc = false;
+
     if ( Instance().timeMod_ != wxFileName(WXCApp::GetCrontabFilename()).GetModificationTime() )
     {
         WXCLog::Do("crontab was modified. Read it again...");
+
+        rc = true;
 
         if ( !(Read()) )
             // error while reading - close wxCron
@@ -126,6 +130,8 @@ WXCCrontab::WXCCrontab ()
             // start the jobs again
             Instance().Start ();
     }
+
+    return rc;
 }
 
 bool WXCCrontab::HasLine (const wxString& strLine)

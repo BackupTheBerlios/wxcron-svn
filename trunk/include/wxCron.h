@@ -26,8 +26,8 @@
 #define WXC_APP_NAME                "wxCron"
 #define WXC_VERSION_MAJOR           0
 #define WXC_VERSION_MINOR           2
-#define WXC_VERSION_RELEASE         1
-#define WXC_VERSION_EXTENSION       ""
+#define WXC_VERSION_RELEASE         2
+#define WXC_VERSION_EXTENSION       "unreleased beta"
 #define WXC_AUTHOR                  "Christian Buhtz"
 
 #endif
