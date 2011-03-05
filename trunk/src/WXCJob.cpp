@@ -53,7 +53,7 @@ WXCJob::WXCJob (const wxString& strOriginalLine,
 
 /*virtual*/ WXCJob::~WXCJob ()
 {
-    if (pTimer_)
+    if ( pTimer_ )
         delete pTimer_;
 }
 

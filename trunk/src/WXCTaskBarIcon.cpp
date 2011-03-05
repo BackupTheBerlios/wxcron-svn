@@ -66,24 +66,11 @@ WXCTaskBarIcon::WXCTaskBarIcon ()
 }
 
 
-/*virtual*/ wxMenu* WXCTaskBarIcon::CreatePopupMenu ()
-{
-    wxMenu* pMenu = new wxMenu();
-
-    pMenu->Append(WXC_TASKBARICON_ID_SETTINGS,		_("Settings"));
-	pMenu->Append(WXC_TASKBARICON_ID_LOG,			_("Show Log"));
-    pMenu->Append(WXC_TASKBARICON_ID_ABOUT,			_("About"));
-	pMenu->AppendSeparator();
-	pMenu->Append(WXC_TASKBARICON_ID_CHECKCRONTAB,	_("Check crontab"));
-	pMenu->Append(WXC_TASKBARICON_ID_EDITCRONTAB,	_("Edit crontab"));
-    pMenu->AppendSeparator();
-    pMenu->Append(WXC_TASKBARICON_ID_CLOSE,			_("Close"));
-
-    return pMenu;
-}
-
 void WXCTaskBarIcon::OnMenuClose (wxCommandEvent& rEvent)
 {
+    /*if (pMenu_)
+        delete pMenu_;*/
+
     wxGetApp().DoClose();
 }
 
@@ -116,5 +103,16 @@ void WXCTaskBarIcon::OnMenuEditCrontab (wxCommandEvent& rEvent)
 
 void WXCTaskBarIcon::OnClick(wxTaskBarIconEvent& rEvent)
 {
-    PopupMenu(CreatePopupMenu());
+    wxMenu menu;
+
+    menu.Append(WXC_TASKBARICON_ID_SETTINGS,		_("Settings"));
+    menu.Append(WXC_TASKBARICON_ID_LOG,			_("Show Log"));
+    menu.Append(WXC_TASKBARICON_ID_ABOUT,		_("About"));
+    menu.AppendSeparator();
+    menu.Append(WXC_TASKBARICON_ID_CHECKCRONTAB,	_("Check crontab"));
+    menu.Append(WXC_TASKBARICON_ID_EDITCRONTAB,	_("Edit crontab"));
+    menu.AppendSeparator();
+    menu.Append(WXC_TASKBARICON_ID_CLOSE,		_("Close"));
+
+    PopupMenu(&menu);
 }

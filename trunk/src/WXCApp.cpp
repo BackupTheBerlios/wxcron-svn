@@ -26,6 +26,7 @@
 #include <wx/timer.h>
 #include <wx/snglinst.h>
 #include <wx/stdpaths.h>
+#include <wx/filefn.h>
 
 #include "WXCTaskBarIcon.h"
 #include "WXCCrontab.h"
@@ -46,8 +47,6 @@ WXCApp::WXCApp ()
 
 /*virtual*/ WXCApp::~WXCApp ()
 {
-    if ( pFSWatcher_ )
-        delete pFSWatcher_;
 }
 
 /*static*/ wxString WXCApp::GetFullApplicationName ()
@@ -127,6 +126,9 @@ WXCApp::WXCApp ()
 
 /*virtual*/ bool WXCApp::OnInit()
 {
+    // working dir
+    ::wxSetWorkingDirectory( wxStandardPaths::Get().GetExecutablePath().BeforeLast(wxFILE_SEP_PATH) );
+
 	// init log and config
 	WXCLog::Instance().Init();
 	WXCConfig::Instance().Init();
@@ -210,10 +212,16 @@ void WXCApp::OnFileSystemEvent(wxFileSystemWatcherEvent& rEvent)
 {
     WXCLog::Do(wxString::Format("Close %s...\n", WXC_APP_NAME));
 
-    if (pTaskBarIcon_)
-        pTaskBarIcon_->RemoveIcon();
+    if ( pFSWatcher_ )
+        delete pFSWatcher_;
 
-    return 1;
+    if (pTaskBarIcon_)
+    {
+        pTaskBarIcon_->RemoveIcon();
+        delete pTaskBarIcon_;
+    }
+
+    return wxApp::OnExit();
 }
 
 void WXCApp::DoClose ()

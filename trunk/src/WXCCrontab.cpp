@@ -196,8 +196,16 @@ void WXCCrontab::YYY (const wxString& str)
     WXCLog::Do(wxEmptyString, false);
 }
 */
+
 void WXCCrontab::Start ()
 {
+    for (WXCJobVectorIt it = vecJobs_.begin();
+         it != vecJobs_.end();
+         ++it)
+    {
+        (*it).Start();
+    }
+
     //OK YYY("5 * * * *");
     //OK YYY("*/5 * * * *");
     //OK YYY("5,45 * * * *");
@@ -238,11 +246,4 @@ void WXCCrontab::Start ()
     //OK YYY("*/9 *   * * *");
 
     //return;
-
-    for (WXCJobVectorIt it = vecJobs_.begin();
-         it != vecJobs_.end();
-         ++it)
-    {
-        (*it).Start();
-    }
 }

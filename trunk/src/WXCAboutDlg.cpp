@@ -31,6 +31,7 @@
 #include <wx/mimetype.h>
 #include <wx/image.h>
 
+
 #include "WXCHyperlinkCtrl.h"
 #include "WXCApp.h"
 #include "wxCron.h"
@@ -63,7 +64,6 @@ WXCAboutDlg::WXCAboutDlg ()
     wxGridSizer* pMiddleSizer   = new wxGridSizer(2);
     wxBoxSizer* pMLeftSizer     = new wxBoxSizer(wxVERTICAL);
     wxBoxSizer* pMRightSizer    = new wxBoxSizer(wxVERTICAL);
-
 
     wxStaticBitmap* pLogo = new wxStaticBitmap(this, wxID_ANY, wxBitmap("graphic/wxCron_text.png", wxBITMAP_TYPE_PNG));
 

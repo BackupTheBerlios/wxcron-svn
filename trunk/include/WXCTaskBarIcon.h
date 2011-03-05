@@ -43,9 +43,6 @@ class WXCTaskBarIcon : public wxTaskBarIcon
         virtual ~WXCTaskBarIcon ();
 
         ///
-        virtual wxMenu* CreatePopupMenu ();
-
-        ///
         void OnClick(wxTaskBarIconEvent& rEvent);
 
         ///
