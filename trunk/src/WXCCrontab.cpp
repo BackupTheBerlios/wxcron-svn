@@ -43,15 +43,57 @@ WXCCrontab::WXCCrontab ()
 }
 
 
-/*static*/ bool WXCCrontab::Read ()
+/*static*/ void WXCCrontab::Read ()
 {
+    // check if config file exists
+	if ( !(wxFile::Exists(WXCApp::GetCrontabFilename())) )
+    {
+        wxFile file(WXCApp::GetCrontabFilename(), wxFile::write);
+        WXCLog::Do(wxString::Format("Crontab-file %s doesn't exists! Create a default one...", WXCApp::GetCrontabFilename()));
+
+        file.Write
+        (
+            wxString::Format
+            (
+                "# just a sample crontab\n" \
+                "#M    S   T M W    Befehl\n" \
+                "\n" \
+                "# each hour 3. minute\n" \
+                "#3     *   * * *    calc.exe\n" \
+                "\n" \
+                "# 5 minute intervals\n" \
+                "#*/5   *   * * *    calc.exe\n" \
+                "\n" \
+                "# wendsday 11:38\n" \
+                "#38    11  * * 3    calc.exe\n" \
+                "\n" \
+                "# each midnight 0:00\n" \
+                "#0     0   * * *    calc.exe\n" \
+                "\n" \
+                "# each thursday OR 7. of a month at 3:00 a'clock\n" \
+                "#0     3   7 * 4    calc.exe\n" \
+                "\n" \
+                "# monday till friday 1:20 and 1:30\n" \
+                "#20,50 1   * * 1-5  calc.exe\n" \
+                "\n" \
+                "# each midnight 0:00 but don't catchup the job\n" \
+                "# if the machine wasn't on power at last midnight\n" \
+                "#@nocatchup 0     0   * * *    calc.exe\n" \
+                "\n" \
+                "#hide the running job\n" \
+                "#@hide 0 0 * * * script.bat\n"
+            )
+        );
+    }
+
+
     wxTextFile file;
 
     // open the file
 	if ( file.Open(WXCApp::GetCrontabFilename()) == false )
     {
         WXCLog::Do(wxString::Format("ERROR: The crontab file %s couldn't be loaded!", WXCApp::GetCrontabFilename()));
-        return false;
+        return;
     }
 
     // remember modification time
@@ -109,8 +151,6 @@ WXCCrontab::WXCCrontab ()
         // increment line counter
         ++lLine;
     }
-
-    return true;
 }
 
 /*static*/ bool WXCCrontab::CheckModification ()
@@ -123,12 +163,11 @@ WXCCrontab::WXCCrontab ()
 
         rc = true;
 
-        if ( !(Read()) )
-            // error while reading - close wxCron
-            wxGetApp().DoClose();
-        else
-            // start the jobs again
-            Instance().Start ();
+        //
+        Read();
+
+        // start the jobs again
+        Instance().Start ();
     }
 
     return rc;

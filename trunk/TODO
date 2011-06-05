@@ -1,9 +1,3 @@
-- fixed problem with working directory while starting within autoastart
-- fixed bug with deleting wxFileSystemWatcher at the wrong time
-- fixed dump objects with wrong use of wxMenu
-
-
-
 - Start-Verzögerungs-Option (bei blackfisk-jobs)
 
 - prepare for 0.2.0 release

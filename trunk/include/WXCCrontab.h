@@ -54,8 +54,9 @@ class WXCCrontab
             return sCrontab_;
         }
 
-        /// read and parse the crontab file
-        static bool Read ();
+        /** read and parse the crontab file
+            it will create one if it doesn't exists */ 
+        static void Read ();
 
         /// start all jobs
         void Start ();

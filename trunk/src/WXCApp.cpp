@@ -157,8 +157,8 @@ WXCApp::WXCApp ()
     pTaskBarIcon_ = new WXCTaskBarIcon();
 
     // read the crontab file
-    if ( !(WXCCrontab::Read()) )
-        return false;
+    // create a default one if there is no one
+    WXCCrontab::Read();
 
     // read the timestamps
     WXCTimestampFile::Instance().Read();
